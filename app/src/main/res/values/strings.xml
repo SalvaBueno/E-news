@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">E-News</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="email">Email usuario</string>
+    <string name="entrar">Entrar</string>
+    <string name="registrar">Registrarse</string>
+    <string name="datos_usuario_registro">Datos de registro</string>
+    <string name="nombre_usuario">Nombre Usuario</string>
+    <string name="alias_usuario">Alias</string>
+    <string name="confirmar_contrasena">Confirmar Contraseña</string>
+    <string name="recordar_pass"><u>Recordar Contraseña</u></string>
+    <string name="mensaje_recordar_pass">Se va a enviará un mensaje con la nueva clave a el correo electrónico que se utilice.</string>
+    <string name="recordarpasstitulo">¿Está seguro?</string>
+    <string name="error_conexion">Error de conexión</string>
+    <string name="logeo_correcto">Inicio de sesión correcto.</string>
+    <string name="usuario_creado">El usuario se ha creado correctamente</string>
+    <string name="pass_dont_match">Las contraseñas no coinciden</string>
+    <string name="debe_rellenar_campos">Debe rellenar todos los campos</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="mensaje_enviado">Se le ha enviado el mensaje a su correo.</string>
+    <string name="debe_indicar_nombre_usuario_registrado">Debe indicar el nombre de usuario con el que desea recuperar la contraseña.</string>
+</resources>
