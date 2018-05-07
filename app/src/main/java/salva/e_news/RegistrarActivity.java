@@ -15,6 +15,8 @@ import org.json.JSONObject;
 import salva.e_news.peticionesBD.JSONUtil;
 import salva.e_news.peticionesBD.Tags;
 
+import static salva.e_news.util.ValidatorEmail.validateEmail;
+
 public class RegistrarActivity extends AppCompatActivity {
     Button registro_usu;
     TextInputEditText pass_usu,email_usu,nombre_usu,confirmar_pass_usu;
@@ -35,48 +37,53 @@ public class RegistrarActivity extends AppCompatActivity {
                 if (!pass_usu.getText().toString().equals(confirmar_pass_usu.getText().toString())) {
                     mensaje= getResources().getString(R.string.pass_dont_match);
                     Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                } else if(!nombre_usu.getText().toString().isEmpty() || !nombre_usu.getText().toString().equals("") ||
-                        !email_usu.getText().toString().isEmpty() || !email_usu.getText().toString().equals("")){
-
-                    String nombre_usuario = nombre_usu.getText().toString();
-                    String email_usuario = email_usu.getText().toString();
-                    String pass_usuario = pass_usu.getText().toString();
-
-                    //Creamos el JSON que vamos a mandar al servidor
-                    JSONObject json = new JSONObject();
-                    try{
-                        json.put(Tags.USUARIO, nombre_usuario);
-                        json.put(Tags.EMAIL, email_usuario);
-                        json.put(Tags.PASSWORD, pass_usuario);
-                    }
-                    catch (JSONException e){
-                        e.printStackTrace();
-                    }
-
-                    //Hacemos petición de login al servidor
-                    json = JSONUtil.hacerPeticionServidor("usuarios/java/registrar_usuario/",json); //En contacto activity, es sesiones/java/getcentros
-
-                    try{
-                        String p = json.getString(Tags.RESULTADO);
-                        if (p.contains(Tags.ERRORCONEXION)){
-                            mensaje= getResources().getString(R.string.error_conexion);
-                            Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                        }else if (p.contains(Tags.OK)){
-                            mensaje= getResources().getString(R.string.usuario_creado);
-                            Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                            finish();
-                        }else if (p.contains(Tags.ERROR)){
-                            String msg = json.getString(Tags.MENSAJE);
-                            Snackbar.make(v, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                        }
-                    }
-                    catch (JSONException e){
-                        e.printStackTrace();
-                    }
-
-                } else{
-                    mensaje= getResources().getString(R.string.debe_rellenar_campos);
+                } else if(nombre_usu.getText().toString().isEmpty() || nombre_usu.getText().toString().equals("") ||
+                        email_usu.getText().toString().isEmpty() || email_usu.getText().toString().equals("")||
+                        pass_usu.getText().toString().isEmpty() || pass_usu.getText().toString().equals("")) {
+                    mensaje = getResources().getString(R.string.debe_rellenar_campos);
                     Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    mensaje="";
+                } else if(!validateEmail(email_usu.getText().toString())){
+                    mensaje = getResources().getString(R.string.email_correcto);
+                    Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    mensaje="";
+                    } else {
+                        String nombre_usuario = nombre_usu.getText().toString();
+                        String email_usuario = email_usu.getText().toString();
+                        String pass_usuario = pass_usu.getText().toString();
+
+                        //Creamos el JSON que vamos a mandar al servidor
+                        JSONObject json = new JSONObject();
+                        try{
+                            json.put(Tags.USUARIO, nombre_usuario);
+                            json.put(Tags.EMAIL, email_usuario);
+                            json.put(Tags.PASSWORD, pass_usuario);
+                        }
+                        catch (JSONException e){
+                            e.printStackTrace();
+                        }
+
+                        //Hacemos petición de login al servidor
+                        json = JSONUtil.hacerPeticionServidor("usuarios/java/registrar_usuario/",json); //En contacto activity, es sesiones/java/getcentros
+
+                        try{
+                            String p = json.getString(Tags.RESULTADO);
+                            if (p.contains(Tags.ERRORCONEXION)){
+                                mensaje= getResources().getString(R.string.error_conexion);
+                                Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            }else if (p.contains(Tags.OK)){
+                                mensaje= getResources().getString(R.string.usuario_creado);
+                                Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                                finish();
+                            }else if (p.contains(Tags.ERROR)){
+                                String msg = json.getString(Tags.MENSAJE);
+                                Snackbar.make(v, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                            }
+                        }
+                        catch (JSONException e){
+                            e.printStackTrace();
+                        }
+
                 }
             }
 

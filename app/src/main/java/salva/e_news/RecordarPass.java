@@ -51,7 +51,7 @@ public class RecordarPass extends AppCompatActivity {
                             JSONObject json = new JSONObject();
                             try {
                                 json.put(Tags.USUARIO, textInputLayout_email.getText().toString());
-                                JSONUtil.hacerPeticionServidor("usuarios/java/recuperar_contrasena/", json);
+                                json = JSONUtil.hacerPeticionServidor("usuarios/java/recuperar_contrasena/", json);
 
 
                                 String p = json.getString(Tags.RESULTADO);
@@ -63,7 +63,6 @@ public class RecordarPass extends AppCompatActivity {
 
 //                                return false;
                                 }
-
                                 else if (p.contains(Tags.OK)) {
                                     mensaje= getResources().getString(R.string.mensaje_enviado);
                                     Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();

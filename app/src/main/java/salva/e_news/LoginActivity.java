@@ -1,5 +1,6 @@
 package salva.e_news;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -52,8 +53,9 @@ TextView recordar_pass;
                     Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 }else if (login()) {
                         Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                        Intent intent = new Intent(v.getContext(), MainActivity.class);
-                        startActivity(intent);
+                        Intent intentmain = getIntent();
+                        setResult(Activity.RESULT_OK, intentmain);
+                        finish();
                 }else{
                     Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     mensaje="";

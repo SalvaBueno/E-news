@@ -20,4 +20,19 @@
     <string name="cancelar">Cancelar</string>
     <string name="mensaje_enviado">Se le ha enviado el mensaje a su correo.</string>
     <string name="debe_indicar_nombre_usuario_registrado">Debe indicar el nombre de usuario con el que desea recuperar la contraseña.</string>
+    <string name="email_correcto">Debe introducir un email con formato correcto.</string>
+    <string name="editar_perfil">Perfil usuario</string>
+    <string name="configuracion">Configuración</string>
+    <string name="cerrarsesion">Cerrar Sesión</string>
+    <string name="error_cerrar_sesion">Se ha producido un error cerrando la sesión.</string>
+    <string name="correcto_cerrar_sesion">Se ha cerrado correctamente la sesión</string>
+    <string name="preferencias_drawer">Preferencias</string>
+    <string name="nombre_usuario_navigation">Nombre de usuario:</string>
+    <string name="email_usuario_drawer">Email de usuario:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="noticias">Noticias</string>
+    <string name="comentarios">Comentarios</string>
+    <string name="categorias_noticias">Categorías</string>
 </resources>

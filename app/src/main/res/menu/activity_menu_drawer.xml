@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group android:checkableBehavior="single">
+    <item
+        android:id="@+id/comentarios"
+        android:icon="@drawable/icono_comentarios"
+        android:title="@string/comentarios"/>
+    <item
+        android:id="@+id/noticias"
+        android:icon="@drawable/icono_noticias"
+        android:title="@string/noticias"/>
+    <item
+        android:id="@+id/editar_usuario"
+        android:icon="@drawable/icono_perfil"
+        android:title="@string/editar_perfil"/>
+</group>
+</menu>

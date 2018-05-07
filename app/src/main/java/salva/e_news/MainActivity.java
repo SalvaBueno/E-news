@@ -1,37 +1,96 @@
 package salva.e_news;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import salva.e_news.modelos.Usuario;
 import salva.e_news.peticionesBD.JSONUtil;
 import salva.e_news.peticionesBD.Tags;
 
+
 public class MainActivity extends AppCompatActivity {
+
     boolean inicio;
+    private ProgressDialog dialog;
+    static Usuario user;
+    BottomNavigationView bnv;
+    Boolean cerradoSesion = false;
+
+    final Fragment comentariosFragment = new ComentariosFragment();
+    final Fragment noticiasFragment = new NoticiasFragment();
+    final Fragment editarPerfil = new EditarPerfilFragment();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         inicio = true;
+
+        bnv = findViewById(R.id.bnv);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Cargando datos...");
+        dialog.setCancelable(false);
+        //dialog.show();
+
+        if (savedInstanceState == null) {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentContainer, noticiasFragment).commit();
+            bnv.setSelectedItemId(R.id.noticias);
+        }
+
+
+        bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                if (item.getItemId() == R.id.comentarios) {
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainer, comentariosFragment).commit();
+                } else if (item.getItemId() == R.id.noticias) {
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainer, noticiasFragment).commit();
+                } else if (item.getItemId() == R.id.editar_usuario) {
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainer, editarPerfil).commit();
+                }
+                return true;
+            }
+        });
+
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (inicio) {
-            lanzarLogin();
+        lanzarLogin();
+        if (cerradoSesion) {
+            cerradoSesion = false;
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentContainer, noticiasFragment).commit();
+            bnv.setSelectedItemId(R.id.noticias);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
     }
 
     @Override
@@ -45,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         moveTaskToBack(true);
         startActivity(intent);
+
+
     }
 
     public void lanzarLogin() {
@@ -54,6 +115,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(), LoginActivity.class);
                 startActivityForResult(intent, Tags.LOGIN);
+            }else{
+               //nombre_usario_drawer.setText(user.getNombre());
+               //email_usuario_drawer.setText(user.getCorreo());
+
             }
         } else {
             //AQUI EL LOGIN CON SQLITE
@@ -69,6 +134,23 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else {
             return false;
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case Tags.LOGIN:
+                    Log.v("sesion", "on activity result" + cerradoSesion.toString());
+
+                    Log.v("pasando", "pasando");
+                    cerradoSesion = true;
+                    break;
+                default:
+                    super.onActivityResult(requestCode, resultCode, data);
+            }
         }
     }
 

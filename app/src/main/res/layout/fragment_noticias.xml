@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NoticiasFragment"
+    tools:layout_editor_absoluteY="25dp">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/categorias_noticias"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/league_of_legends"
+        android:layout_width="0dp"
+        android:layout_height="86dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@null"
+        android:layout_marginTop="50dp"
+        android:elevation="2dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lol"
+        app:layout_constraintEnd_toStartOf="@+id/world_of_warcraft"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <ImageButton
+        android:id="@+id/world_of_warcraft"
+        android:layout_width="0dp"
+        android:layout_height="86dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@null"
+        android:adjustViewBounds="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/wow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/league_of_legends"
+        app:layout_constraintTop_toTopOf="@+id/league_of_legends" />
+
+    <ImageButton
+        android:id="@+id/overwatch"
+        android:layout_width="0dp"
+        android:layout_height="86dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/overwatch"
+        app:layout_constraintEnd_toStartOf="@+id/fornite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/league_of_legends" />
+
+    <ImageButton
+        android:id="@+id/fornite"
+        android:layout_width="0dp"
+        android:layout_height="86dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@null"
+        android:layout_marginTop="25dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/fortnite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/overwatch"
+        app:layout_constraintTop_toBottomOf="@+id/world_of_warcraft" />
+
+    <ImageButton
+        android:id="@+id/fifa"
+        android:layout_width="0dp"
+        android:layout_height="86dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@null"
+        android:layout_marginTop="25dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/fifa"
+        app:layout_constraintEnd_toStartOf="@+id/hearhstone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/overwatch" />
+
+    <ImageButton
+        android:id="@+id/clash_royale"
+        android:layout_width="0dp"
+        android:layout_height="86dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/clashroyale"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/csgo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fifa"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/hearhstone"
+        android:layout_width="0dp"
+        android:layout_height="86dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/hs"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fifa"
+        app:layout_constraintTop_toBottomOf="@+id/fornite" />
+
+    <ImageButton
+        android:id="@+id/csgo"
+        android:layout_width="0dp"
+        android:layout_height="86dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@null"
+        android:layout_marginTop="25dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/csgo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/clash_royale"
+        app:layout_constraintTop_toBottomOf="@+id/hearhstone"
+        app:layout_constraintVertical_bias="0.00999999" />
+</android.support.constraint.ConstraintLayout>
