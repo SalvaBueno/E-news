@@ -3,37 +3,29 @@ package salva.e_news;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import java.util.ArrayList;
 
-import salva.e_news.modelos.Comentario;
-import salva.e_news.peticionesBD.JSONUtil;
-import salva.e_news.peticionesBD.Preferencias;
-import salva.e_news.peticionesBD.Tags;
-
-
+import salva.e_news.modelos.Noticia;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ComentariosFragment extends Fragment {
+public class NoticiasFiltradoFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    ArrayList<Comentario> listaComentario;
+    ArrayList<Noticia> listaNoticia;
     RecyclerView recyclerView;
 
-    public ComentariosFragment() {
+    public NoticiasFiltradoFragment() {
         // Required empty public constructor
     }
 
@@ -41,32 +33,31 @@ public class ComentariosFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-     ;
+        ;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_noticias_filtrado, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_comentarios, container, false);
 
-        listaComentario = new ArrayList<>();
-        recyclerView = view.findViewById(R.id.recyclerViewcomentarios);
+        listaNoticia = new ArrayList<>();
+        recyclerView = view.findViewById(R.id.recyclerViewNoticiasFiltro);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
-        //cargarComentarios();
-        Log.v("animalesoncreateview", listaComentario.toString());
+        //cargarNoticias();
 
-        AdapterComentarios adaptadorAnimales = new AdapterComentarios(listaComentario);
+        AdapterNoticias adaptadorAnimales = new AdapterNoticias(listaNoticia);
         recyclerView.setAdapter(adaptadorAnimales);
 
         return view;
+
     }
-
-
 
     //METODO PARA RELLENAR LOS ITEMS
 
-   /* public void cargarComentarios() {
+   /* public void cargarNoticias() {
         String token = Preferencias.getToken(getActivity());
         String usuario_id = Preferencias.getID(getActivity());
         //Creamos el JSON que vamos a mandar al servidor
@@ -119,5 +110,6 @@ public class ComentariosFragment extends Fragment {
     public void onResume() {
         super.onResume();
     }
+
 
 }

@@ -3,6 +3,7 @@ package salva.e_news;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -13,7 +14,29 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
+
 import android.widget.Toast;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +45,7 @@ import salva.e_news.modelos.Usuario;
 import salva.e_news.peticionesBD.JSONUtil;
 import salva.e_news.peticionesBD.Tags;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 TextInputEditText email_usu;
 TextInputEditText pass_usu;
 TextInputLayout textInputLayout_email;
@@ -30,7 +53,10 @@ TextInputLayout textInputLayout_pass;
 Button entrar, registrar;
 String mensaje="";
 TextView recordar_pass;
-
+SignInButton signInButton;
+GoogleApiClient mGoogleApiClient;
+String nombre_usu2, email_usu2;
+private static final int RC_SIGN_IN = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,24 +64,36 @@ TextView recordar_pass;
         setContentView(R.layout.activity_login);
         email_usu = findViewById(R.id.email_usu);
         pass_usu = findViewById(R.id.pass_usu);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
         textInputLayout_email= findViewById(R.id.textInputLayout_email);
         textInputLayout_pass = findViewById(R.id.textInputLayout_pass);
         cargarBotones();
+
     }
 
     private void cargarBotones() {
         entrar = findViewById(R.id.button_entrar);
         entrar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(email_usu.getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(pass_usu.getWindowToken(), 0);
                 if(email_usu.getText().toString().isEmpty() || email_usu.getText().toString().equals("") ||
                         pass_usu.getText().toString().isEmpty() || pass_usu.getText().toString().equals("")) {
                     mensaje=getResources().getString(R.string.debe_rellenar_campos);
                     Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 }else if (login()) {
                         Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                        Intent intentmain = getIntent();
-                        setResult(Activity.RESULT_OK, intentmain);
-                        finish();
+                    Intent intentmain = getIntent();
+                    setResult(Activity.RESULT_OK, intentmain);
+                    finish();
                 }else{
                     Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     mensaje="";
@@ -79,6 +117,13 @@ TextView recordar_pass;
             }
 
         });
+        signInButton = (SignInButton) findViewById(R.id.bt_google);
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
 
     }
     @Override
@@ -92,6 +137,11 @@ TextView recordar_pass;
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         moveTaskToBack(true);
         startActivity(intent);
+    }
+
+    public void signIn() {
+        Intent signIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signIntent, RC_SIGN_IN);
     }
 
     /**
@@ -126,8 +176,6 @@ TextView recordar_pass;
             else if (p.contains(Tags.OK)) {
                 Usuario.guardarEnPref(this, usuario, json.getString(Tags.TOKEN)); //Guarda en las preferencias la token
                 mensaje=getResources().getString(R.string.logeo_correcto);
-                setResult(Tags.LOGIN_OK);
-                finish();
                 return true;
             }
             //resultado falla por otro error
@@ -143,5 +191,64 @@ TextView recordar_pass;
         return false;
     }
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //SI REQUEST CODE ES IGUAL A RC_SIGN_IN INTENTA INICIAR CON GOOGLE
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case RC_SIGN_IN:
+                    GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+                    handleSignInResult(result);
+                    break;
+                default:
+                    super.onActivityResult(requestCode, resultCode, data);
+            }
+        }
+    }
+
+    //METODO DONDE SE EJECUTA EL INICIO CUANDO ES GOOGLE
+    private void handleSignInResult(GoogleSignInResult result) {
+        if (result.isSuccess()) {
+            GoogleSignInAccount acct = result.getSignInAccount();
+            email_usu2 = acct.getEmail();
+            nombre_usu2 = email_usu2.substring(0, email_usu2.indexOf("@"));
+            JSONObject json = new JSONObject();
+            Log.d("ERROR", "NOMBRE USUARIO" + nombre_usu2 + "EMAIL USU" + email_usu2);
+            try {
+                json.put(Tags.USUARIO, nombre_usu2);
+                json.put(Tags.EMAIL, email_usu2);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            //Hacemos petición de login al servidor
+            json = JSONUtil.hacerPeticionServidor("usuarios/java/registro_google/", json);
+
+            try {
+                String p = json.getString(Tags.RESULTADO);
+                //Comprobamos la conexión con el servidor
+                if (p.contains(Tags.ERRORCONEXION)) {
+                    Toast.makeText(getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
+                }
+                //En caso de que conecte
+                else if (p.contains(Tags.OK)) {
+                    Usuario.guardarEnPref(this, nombre_usu2, json.getString(Tags.TOKEN));
+                    setResult(Tags.LOGIN);
+                    finish();
+                }
+                //resultado falla por otro error
+                else if (p.contains(Tags.ERROR)) {
+                    String msg = json.getString(Tags.MENSAJE);
+                    Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 }

@@ -3,6 +3,9 @@ package salva.e_news;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +33,11 @@ public class NoticiasFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_noticias, container, false);
-
         lol = view.findViewById(R.id.league_of_legends);
         lol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ((MainActivity)getActivity()).cargarfiltrado("lol");
             }
         });
 
@@ -43,7 +45,7 @@ public class NoticiasFragment extends Fragment {
         overwatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ((MainActivity)getActivity()).cargarfiltrado("overwatch");
             }
         });
 
@@ -51,7 +53,7 @@ public class NoticiasFragment extends Fragment {
         clash_royale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ((MainActivity)getActivity()).cargarfiltrado("clashroyale");
             }
         });
 
@@ -59,7 +61,7 @@ public class NoticiasFragment extends Fragment {
         fifa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ((MainActivity)getActivity()).cargarfiltrado("fifa");
             }
         });
 
@@ -67,7 +69,7 @@ public class NoticiasFragment extends Fragment {
         csgo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ((MainActivity)getActivity()).cargarfiltrado("csgo");
             }
         });
 
@@ -75,7 +77,7 @@ public class NoticiasFragment extends Fragment {
         hs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ((MainActivity)getActivity()).cargarfiltrado("hs");
             }
         });
 
@@ -83,7 +85,7 @@ public class NoticiasFragment extends Fragment {
         fornite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ((MainActivity)getActivity()).cargarfiltrado("fornite");
             }
         });
 
@@ -91,7 +93,7 @@ public class NoticiasFragment extends Fragment {
         wow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ((MainActivity)getActivity()).cargarfiltrado("wow");
             }
         });
 

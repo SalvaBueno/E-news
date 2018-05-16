@@ -20,13 +20,15 @@ public class Usuario{
     private String apellidos;
     private String correo;
     private String imagenURL;
+    private boolean logingoogle;
 
-    public Usuario(String username, String pass, String correo, String nombre, String apellidos){
+    public Usuario(String username, String pass, String correo, String nombre, String apellidos, boolean logingoogle){
         this.setUsername(username);
         this.password = pass;
         this.setCorreo(correo);
         this.setNombre(nombre);
         this.setApellidos(apellidos);
+        this.setLogingoogle(logingoogle);
     }
 
     /**
@@ -37,12 +39,37 @@ public class Usuario{
     public Usuario(JSONObject json){
         try {
             setUsername(json.getString(Tags.USERNAME));
-            setCorreo(json.getString(Tags.EMAIL));
-            setNombre(json.getString(Tags.NOMBRE));
-            setApellidos(json.getString(Tags.APELLIDOS));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-            this.imagenURL=json.getString(Tags.FOTO);
-            Log.i("USUARIO",this.imagenURL);
+        try {
+            setCorreo(json.getString(Tags.EMAIL));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            setNombre(json.getString(Tags.NOMBRE));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            setApellidos(json.getString(Tags.APELLIDOS));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            this.imagenURL = json.getString(Tags.FOTO);
+            Log.i("USUARIO", this.imagenURL);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            setLogingoogle(json.getBoolean(Tags.LOGINGOOGLE));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -155,5 +182,13 @@ public class Usuario{
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public boolean isLogingoogle() {
+        return logingoogle;
+    }
+
+    public void setLogingoogle(boolean logingoogle) {
+        this.logingoogle = logingoogle;
     }
 }

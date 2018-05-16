@@ -1,13 +1,31 @@
 package salva.e_news.modelos;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import salva.e_news.peticionesBD.Tags;
+
 public class Comentario {
     String contenido_comentario;
     String fecha_comentario;
+    Noticia noticia;
 
-    public Comentario(String contenido_comentario, String fecha_comentario) {
-        this.setContenido_comentario(contenido_comentario);
-        this.setFecha_comentario(fecha_comentario);
-
+    public Comentario(JSONObject jsonObject) {
+        try {
+            setContenido_comentario(jsonObject.getString(Tags.CONTENIDO_COMENTARIO));
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        try {
+            setContenido_comentario(jsonObject.getString(Tags.FECHA_COMENTARIO));
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        try {
+            setNoticia(new Noticia(jsonObject));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public String getContenido_comentario() {
@@ -24,5 +42,13 @@ public class Comentario {
 
     public void setFecha_comentario(String fecha_comentario) {
         this.fecha_comentario = fecha_comentario;
+    }
+
+    public Noticia getNoticia() {
+        return noticia;
+    }
+
+    public void setNoticia(Noticia noticia) {
+        this.noticia = noticia;
     }
 }

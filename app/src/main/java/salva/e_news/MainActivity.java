@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     final Fragment comentariosFragment = new ComentariosFragment();
     final Fragment noticiasFragment = new NoticiasFragment();
     final Fragment editarPerfil = new EditarPerfilFragment();
+    final Fragment noticiasFiltradasFragment = new NoticiasFiltradoFragment();
 
 
     @Override
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         dialog = new ProgressDialog(this);
         dialog.setMessage("Cargando datos...");
         dialog.setCancelable(false);
-        //dialog.show();
+        dialog.show();
 
         if (savedInstanceState == null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -72,6 +73,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        dialog.cancel();
+    }
+
+    public void cargarfiltrado(String nombreCategoria){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainer, noticiasFiltradasFragment).commit();
     }
 
 
@@ -115,10 +123,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(), LoginActivity.class);
                 startActivityForResult(intent, Tags.LOGIN);
-            }else{
-               //nombre_usario_drawer.setText(user.getNombre());
-               //email_usuario_drawer.setText(user.getCorreo());
-
             }
         } else {
             //AQUI EL LOGIN CON SQLITE
@@ -144,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
             switch (requestCode) {
                 case Tags.LOGIN:
                     Log.v("sesion", "on activity result" + cerradoSesion.toString());
-
                     Log.v("pasando", "pasando");
                     cerradoSesion = true;
                     break;

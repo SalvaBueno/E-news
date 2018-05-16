@@ -63,7 +63,15 @@ public class Tags {
             DIA_SEMANA = "dia_semana",
             DIA_NUMERO = "dia_numero",
             PRIMERASESION = "noesprimerasesion",
-            APUNTADO = "apuntado";
+            APUNTADO = "apuntado",
+            LOGINGOOGLE = "logingoogle",
+            CATEGORIA_NOTICIA="categoria_noticia",
+            CONTENIDO_NOTICIA="contenido_noticia",
+            FECHA_NOTICIA="fecha_noticia",
+            FECHA_COMENTARIO="fecha_comentario",
+            CONTENIDO_COMENTARIO="contenido_comentario",
+            NOMBRE_CATEGORIA="nombre_categoria",
+            DESCRIPCION_CATEGORIA="descripcion_categoria";
 
 
     public static final String ERRORCONEXION = "error conexion";

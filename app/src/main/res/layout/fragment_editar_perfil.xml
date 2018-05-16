@@ -4,21 +4,119 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditarPerfilFragment">
+    tools:context=".EditarPerfilFragment"
+    android:background="@color/colorfondoaplicacion">
 
     <!-- TODO: Update blank fragment layout -->
 
     <Button
         android:id="@+id/btn_cerrar_sesion"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="368dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="151dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/blanco"
+        android:background="@color/colorbotonesaplicacion"
         android:text="@string/cerrarsesion"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cambiarcontraseña" />
+
+    <TextView
+        android:id="@+id/tv_editarperfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="163dp"
+        android:layout_marginStart="163dp"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/colorbotonesaplicacion"
+        android:text="@string/editar_perfil"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/editardatos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/blanco"
+        android:background="@color/colorbotonesaplicacion"
+        android:layout_marginTop="100dp"
+        android:text="@string/cambiardatos"
+        app:layout_constraintBottom_toTopOf="@+id/cambiarcontraseña"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <Button
+        android:id="@+id/cambiarcontraseña"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/blanco"
+        android:background="@color/colorbotonesaplicacion"
+        android:layout_marginStart="16dp"
+        android:text="@string/cambiarcontrasena"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cerrar_sesion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editardatos" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/colorbotonesaplicacion"
+        android:text="@string/nombre_usuario"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_nombre_editar_perfil" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorbotonesaplicacion"
+        android:layout_marginTop="24dp"
+        android:text="@string/email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/tv_nombre_editar_perfil"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="50dp"
+        android:textSize="15sp"
+        android:text="@string/nombre_usuario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_email_editar_perfil"
+        app:layout_constraintTop_toBottomOf="@+id/tv_editarperfil" />
+
+    <TextView
+        android:id="@+id/tv_email_editar_perfil"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textSize="15sp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nombre_editar_perfil" />
 </android.support.constraint.ConstraintLayout>

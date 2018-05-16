@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CambiarContrasena"
+    android:background="@color/colorfondoaplicacion">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/colorbotonesaplicacion"
+        android:textSize="30sp"
+        android:layout_marginTop="43dp"
+        android:text="@string/cambiarcontrasena"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="122dp"
+        android:layout_height="45dp"
+        android:textColor="@color/colorbotonesaplicacion"
+        android:layout_marginStart="16dp"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:text="@string/contrasena_actual_con_puntos"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/edit_contrasena_actual"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_contrasena_actual" />
+
+    <EditText
+        android:id="@+id/edit_contrasena_actual"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/contrasena_actual"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="123dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorbotonesaplicacion"
+        android:text="@string/nueva_contrasena_con_puntos"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/edit_nueva_contrasena"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_nueva_contrasena" />
+
+    <EditText
+        android:id="@+id/edit_nueva_contrasena"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/nueva_contrasena"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/edit_contrasena_actual" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="123dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/confirmar_contrasena_con_puntos"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorbotonesaplicacion"
+        app:layout_constraintEnd_toStartOf="@+id/edit_confirmar_contrasena"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_confirmar_contrasena" />
+
+    <EditText
+        android:id="@+id/edit_confirmar_contrasena"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/confirmar_contrasena"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/edit_nueva_contrasena" />
+
+    <Button
+        android:id="@+id/bttn_cambio_pass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorbotonesaplicacion"
+        android:textColor="@color/blanco"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/aceptar_cambio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_confirmar_contrasena" />
+</android.support.constraint.ConstraintLayout>

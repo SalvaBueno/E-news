@@ -1,13 +1,31 @@
 package salva.e_news.modelos;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import salva.e_news.peticionesBD.Tags;
+
 public class Categoria {
-    String nombre_categoria;
-    String descripcion_categoria;
+    private String pk;
+    private String nombre_categoria;
+    private String descripcion_categoria;
 
-    public Categoria(String nombre_categoria, String descripcion_categoria) {
-        this.setNombre_categoria(nombre_categoria);
-        this.setDescripcion_categoria(descripcion_categoria);
-
+    public Categoria(JSONObject json) {
+        try {
+            setPk(json.getString(Tags.PK));
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        try {
+            setNombre_categoria(json.getString(Tags.NOMBRE_CATEGORIA));
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        try {
+            setDescripcion_categoria(json.getString(Tags.DESCRIPCION_CATEGORIA));
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 
     public String getNombre_categoria() {
@@ -26,5 +44,12 @@ public class Categoria {
         this.descripcion_categoria = descripcion_categoria;
     }
 
+    public String getPk() {
+        return pk;
+    }
+
+    public void setPk(String pk) {
+        this.pk = pk;
+    }
 
 }

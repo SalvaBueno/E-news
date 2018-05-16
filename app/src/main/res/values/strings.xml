@@ -29,10 +29,25 @@
     <string name="preferencias_drawer">Preferencias</string>
     <string name="nombre_usuario_navigation">Nombre de usuario:</string>
     <string name="email_usuario_drawer">Email de usuario:</string>
+    <string name="pass_min_cuatro">La nueva contraseña debe tener 4 caracteres como mínimo.</string>
+    <string name="need_cambio_datos">Necesita cambiar algun campo para poder modificar sus datos.</string>
+    <string name="cambio_datos_ok">Se han cambiado los datos correctamente.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="noticias">Noticias</string>
     <string name="comentarios">Comentarios</string>
     <string name="categorias_noticias">Categorías</string>
+    <string name="cambiardatos">Cambiar datos del usuario</string>
+    <string name="cambiarcontrasena">Cambiar Contraseña</string>
+    <string name="contrasena_actual">Contraseña actual</string>
+    <string name="nueva_contrasena">Nueva Contraseña</string>
+    <string name="confirmar_contrasena_con_puntos">Confirmar contraseña:</string>
+    <string name="nueva_contrasena_con_puntos">Nueva contraseña:</string>
+    <string name="contrasena_actual_con_puntos">Contraseña actual:</string>
+    <string name="solicitar_cambio">Solicitar cambio</string>
+    <string name="aceptar_cambio">Aceptar cambio</string>
+    <string name="cambio_contrasena_correcto">Cambio de contraseña realizado correctamente.</string>
+    <string name="datos_usuario">Datos del usuario</string>
+    <string name="cambios_para_editar">Introduce cambios para poder editar</string>
 </resources>
