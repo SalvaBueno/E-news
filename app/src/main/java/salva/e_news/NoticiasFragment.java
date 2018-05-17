@@ -11,6 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import salva.e_news.modelos.Noticia;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +38,7 @@ public class NoticiasFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_noticias, container, false);
+
         lol = view.findViewById(R.id.league_of_legends);
         lol.setOnClickListener(new View.OnClickListener() {
             @Override

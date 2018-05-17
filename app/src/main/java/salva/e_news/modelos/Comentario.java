@@ -2,13 +2,16 @@ package salva.e_news.modelos;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import salva.e_news.modelos.Usuario;
+import salva.e_news.modelos.Categoria;
+import salva.e_news.modelos.Noticia;
 import salva.e_news.peticionesBD.Tags;
 
 public class Comentario {
     String contenido_comentario;
     String fecha_comentario;
     Noticia noticia;
+    Usuario usuario;
 
     public Comentario(JSONObject jsonObject) {
         try {
@@ -22,8 +25,13 @@ public class Comentario {
             e.printStackTrace();
         }
         try {
-            setNoticia(new Noticia(jsonObject));
-        }catch (Exception e){
+            setNoticia(new Noticia(jsonObject.getJSONObject(Tags.NOTICIA)));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            setUsuario(new Usuario(jsonObject.getJSONObject(Tags.USUARIO)));
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -51,4 +59,14 @@ public class Comentario {
     public void setNoticia(Noticia noticia) {
         this.noticia = noticia;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+
 }

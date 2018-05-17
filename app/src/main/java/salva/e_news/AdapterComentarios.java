@@ -40,9 +40,9 @@ public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.
 
     @Override
     public void onBindViewHolder(ComentariosViewHolder holder, int position) {
-        //holder.tv_raza_animal.setText(listaComentarios.get(position).getRaza());
-        //holder.tv_nombre_animal.setText(listaComentarios.get(position).getNombre());
-       //holder.iv_animal.setImageResource(R.drawable.nueva_pancarta);
+        holder.nomUsuario.setText(listaComentarios.get(position).getUsuario().getUsername());
+        holder.nomNoticia.setText(listaComentarios.get(position).getNoticia().getNombre_noticia());
+        holder.textComentario.setText(listaComentarios.get(position).getContenido_comentario());
     }
 
     @Override
@@ -62,14 +62,13 @@ public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.
     }
 
     public class ComentariosViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_raza_animal, tv_nombre_animal;
-        ImageView iv_animal;
+        TextView nomUsuario, nomNoticia, textComentario;
 
         public ComentariosViewHolder(View itemView) {
             super(itemView);
-            //tv_raza_animal = itemView.findViewById(R.id.tv_raza_animal);
-            //tv_nombre_animal = itemView.findViewById(R.id.tv_nombre_animal);
-            //iv_animal = itemView.findViewById(R.id.iv_animal);
+            nomUsuario = itemView.findViewById(R.id.TextViewNomUsuario);
+            nomNoticia = itemView.findViewById(R.id.textViewNoticia);
+            textComentario = itemView.findViewById(R.id.textViewComentario);
         }
     }
 }

@@ -5,6 +5,7 @@ public class Tags {
     public static final String SERVIDOR = "http://192.168.1.27:8000/";
 
     public static final String USUARIO = "usuario",
+            NOTICIA="noticia",
             USUARIOS = "usuarios",
             PASSWORD = "password",
             PASSWORD_ANTIGUA = "antigua",
@@ -66,12 +67,16 @@ public class Tags {
             APUNTADO = "apuntado",
             LOGINGOOGLE = "logingoogle",
             CATEGORIA_NOTICIA="categoria_noticia",
-            CONTENIDO_NOTICIA="contenido_noticia",
+            CONTENIDO_NOTICIA="descripcion_noticia",
+            NOMBRE_NOTICIA= "nombre_noticia",
             FECHA_NOTICIA="fecha_noticia",
             FECHA_COMENTARIO="fecha_comentario",
             CONTENIDO_COMENTARIO="contenido_comentario",
             NOMBRE_CATEGORIA="nombre_categoria",
-            DESCRIPCION_CATEGORIA="descripcion_categoria";
+            DESCRIPCION_CATEGORIA="descripcion_categoria",
+            LISTA_COMENTARIOS="comentarios",
+            LISTA_NOTICIAS="noticias",
+            RESUMEN_NOTICIA="resumen_noticia";
 
 
     public static final String ERRORCONEXION = "error conexion";

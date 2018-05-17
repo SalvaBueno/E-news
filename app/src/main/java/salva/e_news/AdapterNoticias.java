@@ -29,7 +29,7 @@ public class AdapterNoticias extends RecyclerView.Adapter<AdapterNoticias.Notici
 
     @Override
     public NoticiasViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_comentarios, null, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_noticias, null, false);
         RecyclerView.LayoutParams layParams = new RecyclerView.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(layParams);
@@ -41,9 +41,10 @@ public class AdapterNoticias extends RecyclerView.Adapter<AdapterNoticias.Notici
 
     @Override
     public void onBindViewHolder(NoticiasViewHolder holder, int position) {
-        //holder.tv_raza_animal.setText(listaComentarios.get(position).getRaza());
-        //holder.tv_nombre_animal.setText(listaComentarios.get(position).getNombre());
-       //holder.iv_animal.setImageResource(R.drawable.nueva_pancarta);
+        holder.nombre_noticia.setText(listaNoticias.get(position).getNombre_noticia());
+        holder.fecha_noticia.setText(listaNoticias.get(position).getFecha_noticia());
+        holder.resumen_noticia.setText(listaNoticias.get(position).getResumen_noticia());
+        holder.imagen_noticia.setImageResource(R.drawable.ic_launcher);
     }
 
     @Override
@@ -63,14 +64,15 @@ public class AdapterNoticias extends RecyclerView.Adapter<AdapterNoticias.Notici
     }
 
     public class NoticiasViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_raza_animal, tv_nombre_animal;
-        ImageView iv_animal;
+        TextView nombre_noticia, fecha_noticia,resumen_noticia;
+        ImageView imagen_noticia;
 
         public NoticiasViewHolder(View itemView) {
             super(itemView);
-            //tv_raza_animal = itemView.findViewById(R.id.tv_raza_animal);
-            //tv_nombre_animal = itemView.findViewById(R.id.tv_nombre_animal);
-            //iv_animal = itemView.findViewById(R.id.iv_animal);
+            nombre_noticia = itemView.findViewById(R.id.nombre_noticia);
+            fecha_noticia = itemView.findViewById(R.id.fecha_noticia);
+            resumen_noticia = itemView.findViewById(R.id.resumen_noticia);
+            imagen_noticia = itemView.findViewById(R.id.imagen_noticia);
         }
     }
 }

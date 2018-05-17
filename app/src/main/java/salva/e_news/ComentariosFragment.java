@@ -32,6 +32,7 @@ public class ComentariosFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     ArrayList<Comentario> listaComentario;
     RecyclerView recyclerView;
+    Comentario comentario;
 
     public ComentariosFragment() {
         // Required empty public constructor
@@ -53,20 +54,16 @@ public class ComentariosFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerViewcomentarios);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
-        //cargarComentarios();
-        Log.v("animalesoncreateview", listaComentario.toString());
+        cargarComentarios();
 
-        AdapterComentarios adaptadorAnimales = new AdapterComentarios(listaComentario);
-        recyclerView.setAdapter(adaptadorAnimales);
+        AdapterComentarios adaptadorComentarios = new AdapterComentarios(listaComentario);
+        recyclerView.setAdapter(adaptadorComentarios);
 
         return view;
     }
 
-
-
     //METODO PARA RELLENAR LOS ITEMS
-
-   /* public void cargarComentarios() {
+   public void cargarComentarios() {
         String token = Preferencias.getToken(getActivity());
         String usuario_id = Preferencias.getID(getActivity());
         //Creamos el JSON que vamos a mandar al servidor
@@ -80,7 +77,7 @@ public class ComentariosFragment extends Fragment {
         }
 
         //Se hace petición de login al servidor.
-        json = JSONUtil.hacerPeticionServidor("protectora/cargar_animales/", json);
+        json = JSONUtil.hacerPeticionServidor("enews/get_comentarios/", json);
 
         try {
             String p = json.getString(Tags.RESULTADO);
@@ -89,17 +86,18 @@ public class ComentariosFragment extends Fragment {
             if (p.contains(Tags.ERRORCONEXION)) {
             // mensaje = "Error de conexión";
             }
-            //En caso de que conecte y no haya animales para dicha busqueda.
-            else if (p.contains(Tags.OK_SIN_ANIMALES)) {
-                Toast.makeText(getContext(), ucFirst(json.getString(Tags.MENSAJE)), Toast.LENGTH_LONG).show();
-            } else if (p.contains(Tags.OK)) {
+            //En caso de que conecte
+             else if (p.contains(Tags.OK)) {
                 String res = json.getString(Tags.RESULTADO);
-                JSONArray array = json.getJSONArray(Tags.LISTA_ANIMALES);
-                Log.v("animalesjson", array.toString());
+
+                JSONArray array = json.getJSONArray(Tags.LISTA_COMENTARIOS);
+                Log.v("ComentariooARRAY", array.toString());
                 if (array != null) {
                     for (int i = 0; i < array.length(); i++) {
-                        Comentario comentario = new Comentario(array.getJSONObject(i));
-                        Log.v("Comentario BUCLEEEe", comentario.toString());
+                        comentario = new Comentario(array.getJSONObject(i));
+                        Log.v("Comentarioo1", "ESTO SE SUPONE QUE ES EL NOMBRE DE LA NOTICIA-->"+comentario.getNoticia().getNombre_noticia());
+                        Log.v("Comentarioo2", "ESTO SE SUPONE QUE ES EL NOMBRE DEL USUARIO-->"+comentario.getUsuario().getUsername());
+                        Log.v("Comentarioo3", "ESTO SE SUPONE QUE ES EL CONTENIDO-->"+comentario.getContenido_comentario());
                         listaComentario.add(comentario);
                     }
                 }
@@ -112,7 +110,7 @@ public class ComentariosFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
 
     @Override

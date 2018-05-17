@@ -12,9 +12,17 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import salva.e_news.modelos.Noticia;
+import salva.e_news.peticionesBD.JSONUtil;
+import salva.e_news.peticionesBD.Preferencias;
+import salva.e_news.peticionesBD.Tags;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -22,7 +30,7 @@ public class NoticiasFiltradoFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    ArrayList<Noticia> listaNoticia;
+    ArrayList<Noticia> listaNoticias;
     RecyclerView recyclerView;
 
     public NoticiasFiltradoFragment() {
@@ -42,36 +50,38 @@ public class NoticiasFiltradoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_noticias_filtrado, container, false);
 
 
-        listaNoticia = new ArrayList<>();
+        listaNoticias = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recyclerViewNoticiasFiltro);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
         //cargarNoticias();
 
-        AdapterNoticias adaptadorAnimales = new AdapterNoticias(listaNoticia);
-        recyclerView.setAdapter(adaptadorAnimales);
-
+        AdapterNoticias adapterNoticias = new AdapterNoticias(listaNoticias);
+        recyclerView.setAdapter(adapterNoticias);
         return view;
 
     }
 
     //METODO PARA RELLENAR LOS ITEMS
 
-   /* public void cargarNoticias() {
+   public void cargarNoticias() {
         String token = Preferencias.getToken(getActivity());
         String usuario_id = Preferencias.getID(getActivity());
+        //STRING AÑADIR CATEGORIA !!!!!!!!!!!!!!!!!;
+
         //Creamos el JSON que vamos a mandar al servidor
         JSONObject json = new JSONObject();
         try {
             json.put(Tags.TOKEN, token);
             json.put(Tags.USUARIO_ID, usuario_id);
+            //json.put(Tags.CATEGORIA_NOTICIA, categoria_noticia);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         //Se hace petición de login al servidor.
-        json = JSONUtil.hacerPeticionServidor("protectora/cargar_animales/", json);
+        json = JSONUtil.hacerPeticionServidor("enews/get_noticias/", json);
 
         try {
             String p = json.getString(Tags.RESULTADO);
@@ -81,17 +91,15 @@ public class NoticiasFiltradoFragment extends Fragment {
             // mensaje = "Error de conexión";
             }
             //En caso de que conecte y no haya animales para dicha busqueda.
-            else if (p.contains(Tags.OK_SIN_ANIMALES)) {
-                Toast.makeText(getContext(), ucFirst(json.getString(Tags.MENSAJE)), Toast.LENGTH_LONG).show();
-            } else if (p.contains(Tags.OK)) {
+             else if (p.contains(Tags.OK)) {
                 String res = json.getString(Tags.RESULTADO);
-                JSONArray array = json.getJSONArray(Tags.LISTA_ANIMALES);
-                Log.v("animalesjson", array.toString());
+                JSONArray array = json.getJSONArray(Tags.LISTA_NOTICIAS);
+                Log.v("noticiasjson", array.toString());
                 if (array != null) {
                     for (int i = 0; i < array.length(); i++) {
-                        Comentario comentario = new Comentario(array.getJSONObject(i));
-                        Log.v("Comentario BUCLEEEe", comentario.toString());
-                        listaComentario.add(comentario);
+                        Noticia noticia = new Noticia(array.getJSONObject(i));
+                        Log.v("Noticias BUCLE", noticia.toString());
+                        listaNoticias.add(noticia);
                     }
                 }
             }
@@ -103,7 +111,7 @@ public class NoticiasFiltradoFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
 
     @Override

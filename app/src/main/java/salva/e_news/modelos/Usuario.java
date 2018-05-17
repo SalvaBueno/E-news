@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import salva.e_news.modelos.Usuario;
+import salva.e_news.modelos.Categoria;
+import salva.e_news.modelos.Noticia;
 import org.json.JSONException;
 import org.json.JSONObject;
 
