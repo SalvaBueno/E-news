@@ -1,5 +1,8 @@
 package salva.e_news.modelos;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,7 +11,7 @@ import salva.e_news.modelos.Categoria;
 import salva.e_news.modelos.Noticia;
 import salva.e_news.peticionesBD.Tags;
 
-public class Noticia {
+public class Noticia implements Parcelable {
 
     String pk;
     String descripcion_noticia;
@@ -51,12 +54,34 @@ public class Noticia {
             e.printStackTrace();
         }
         try {
-            setRutaImagen(jsonObject.getString("url_imagen"));
+            setRutaImagen(jsonObject.getString(Tags.IMAGEN_NOTICIA));
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
+
+    protected Noticia(Parcel in) {
+        pk = in.readString();
+        descripcion_noticia = in.readString();
+        resumen_noticia = in.readString();
+        categoria_noticia = in.readString();
+        fecha_noticia = in.readString();
+        nombre_noticia = in.readString();
+        rutaImagen = in.readString();
+    }
+
+    public static final Creator<Noticia> CREATOR = new Creator<Noticia>() {
+        @Override
+        public Noticia createFromParcel(Parcel in) {
+            return new Noticia(in);
+        }
+
+        @Override
+        public Noticia[] newArray(int size) {
+            return new Noticia[size];
+        }
+    };
 
     public String getNombre_noticia() {
         return nombre_noticia;
@@ -108,4 +133,19 @@ public class Noticia {
     public void setResumen_noticia(String resumen_noticia) { this.resumen_noticia = resumen_noticia;  }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(pk);
+        dest.writeString(descripcion_noticia);
+        dest.writeString(resumen_noticia);
+        dest.writeString(categoria_noticia);
+        dest.writeString(fecha_noticia);
+        dest.writeString(nombre_noticia);
+        dest.writeString(rutaImagen);
+    }
 }

@@ -44,10 +44,13 @@
         <activity
             android:name=".RecordarPass"
             android:screenOrientation="portrait" />
-        <activity android:name=".CambiarDatosActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".CambiarContrasena"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".CambiarDatosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CambiarContrasena"
+            android:screenOrientation="portrait" />
+        <activity android:name=".DetalleNoticiaActivity"></activity>
     </application>
 
 </manifest>

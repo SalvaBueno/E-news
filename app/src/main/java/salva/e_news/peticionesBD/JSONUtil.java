@@ -76,7 +76,7 @@ public class JSONUtil {
 	/**
 	 * clase para hacer peticiones asincronas de JSON y un array de rutas de archivos
 	 * 
-	 * @author brian
+	 * @author salva
 	 * 
 	 */
 	private static class Utilidades2 extends AsyncTask<String, Void, JSONObject> {
@@ -131,7 +131,7 @@ public class JSONUtil {
 	/**
 	 * clase para hacer peticiones asincronas de JSON
 	 *
-	 * @author brian
+	 * @author salva
 	 *
 	 */
 	private static class Utilidades3 extends AsyncTask<String, Void, JSONObject> {
@@ -189,7 +189,7 @@ public class JSONUtil {
 	/**
 	 * clase para hacer peticiones asincronas de JSON
 	 *
-	 * @author brian
+	 * @author salva
 	 *
 	 */
 	private static class Utilidades extends AsyncTask<String, Void, JSONObject> {

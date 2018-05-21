@@ -76,7 +76,9 @@ public class Tags {
             DESCRIPCION_CATEGORIA="descripcion_categoria",
             LISTA_COMENTARIOS="comentarios",
             LISTA_NOTICIAS="noticias",
-            RESUMEN_NOTICIA="resumen_noticia";
+            RESUMEN_NOTICIA="resumen_noticia",
+            IMAGEN_NOTICIA="imagen_noticia",
+            NOTICIA_PK ="noticia_pk";
 
 
     public static final String ERRORCONEXION = "error conexion";

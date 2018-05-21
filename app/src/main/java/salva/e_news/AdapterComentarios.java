@@ -12,10 +12,6 @@ import java.util.ArrayList;
 
 import salva.e_news.modelos.Comentario;
 
-/**
- * Created by jblandii on 28/04/18.
- */
-
 public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.ComentariosViewHolder> implements View.OnClickListener {
 
     ArrayList<Comentario> listaComentarios;

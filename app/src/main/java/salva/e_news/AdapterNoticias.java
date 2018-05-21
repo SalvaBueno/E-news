@@ -1,7 +1,15 @@
 package salva.e_news;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Parcelable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,22 +17,40 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
-import salva.e_news.modelos.Comentario;
 import salva.e_news.modelos.Noticia;
+import salva.e_news.modelos.Tarea;
+import salva.e_news.peticionesBD.Tags;
+import salva.e_news.util.DescargarImagen;
 
-/**
- * Created by jblandii on 28/04/18.
- */
 
 public class AdapterNoticias extends RecyclerView.Adapter<AdapterNoticias.NoticiasViewHolder> implements View.OnClickListener {
 
     ArrayList<Noticia> listaNoticias;
     Context context;
     private View.OnClickListener listener;
+    private Handler puente;
+    ArrayList<Tarea> arrayTareas = new ArrayList<>();
+    ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(1);
 
-    public AdapterNoticias(ArrayList<Noticia> listaNoticias) {
+
+    public AdapterNoticias(ArrayList<Noticia> listaNoticias, Context context) {
         this.listaNoticias = listaNoticias;
+        this.context = context;
+       puente = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 100) {
+                    Tarea tarea = ((Tarea) msg.obj);
+                    ImageView imageView = (ImageView) tarea.getDato2();
+                    imageView.setTag("descargado");
+                    Bitmap bitmap = (Bitmap) tarea.getDatoExtra();
+                    imageView.setImageBitmap(bitmap);
+                }
+            }
+        };
     }
 
     @Override
@@ -40,16 +66,69 @@ public class AdapterNoticias extends RecyclerView.Adapter<AdapterNoticias.Notici
     }
 
     @Override
-    public void onBindViewHolder(NoticiasViewHolder holder, int position) {
+    public void onBindViewHolder(NoticiasViewHolder holder, final int position) {
         holder.nombre_noticia.setText(listaNoticias.get(position).getNombre_noticia());
         holder.fecha_noticia.setText(listaNoticias.get(position).getFecha_noticia());
         holder.resumen_noticia.setText(listaNoticias.get(position).getResumen_noticia());
-        holder.imagen_noticia.setImageResource(R.drawable.ic_launcher);
+        holder.imagen_noticia.setImageResource(R.drawable.logo_final);
+        if (holder.imagen_noticia.getTag().equals("logo")) {
+            holder.imagen_noticia.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            holder.imagen_noticia.setImageResource(R.drawable.logo_final);
+            arrayTareas.add(new Tarea("descargarFoto", listaNoticias.get(position), holder.imagen_noticia));
+            Log.v("estaesssss", listaNoticias.get(position).getPk() + "");
+            hacerTarea(position);
+        }
+
+        holder.cardview_id.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentDetallesAnimal = new Intent(v.getContext(), DetalleNoticiaActivity.class);
+                Log.v("noticiaspase", listaNoticias.get(position).toString());
+                intentDetallesAnimal.putExtra("noticia", (Parcelable) listaNoticias.get(position));
+                v.getContext().startActivity(intentDetallesAnimal);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return listaNoticias.size();
+    }
+
+    private void hacerTarea(final int position) {
+        pool.execute(new Thread() {
+            @Override
+            public void run() {
+                while (arrayTareas.size() > 0) {
+                    if (arrayTareas.get(0).getFuncion().contains("descargarFoto")) {
+                        Bitmap bmp;
+                        bmp = descargarFoto((Noticia) arrayTareas.get(0).getDato(), -1000);
+                        String pk = ((Noticia) arrayTareas.get(0).getDato()).getPk();
+                        arrayTareas.get(0).setDatoExtra(bmp);
+                        Message msg = new Message();
+                        msg.what = 100;
+                        msg.arg1 = Integer.parseInt(pk +"");
+                        msg.obj = arrayTareas.get(0);
+                        puente.sendMessage(msg);
+                    }
+                    arrayTareas.remove(0);
+                }
+            }
+        });
+    }
+    private Bitmap descargarFoto(Object objeto, int pk) {
+        Bitmap bitmap;
+        int longitud = ((Noticia) objeto).getRutaImagen().length();
+        String url = ((Noticia) objeto).getRutaImagen();
+        if (longitud > 0) {
+            bitmap = DescargarImagen.descargarImagen(Tags.SERVIDOR +"static/media/" + url);
+            if (pk != -1000) {
+                DescargarImagen.guardaImagen(bitmap, "noticias/", "noticia" + pk);
+            }
+        } else {
+            bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.logo_final);
+        }
+        return bitmap;
     }
 
     public void setOnClickListener(View.OnClickListener listener) {
@@ -66,6 +145,7 @@ public class AdapterNoticias extends RecyclerView.Adapter<AdapterNoticias.Notici
     public class NoticiasViewHolder extends RecyclerView.ViewHolder {
         TextView nombre_noticia, fecha_noticia,resumen_noticia;
         ImageView imagen_noticia;
+        CardView cardview_id;
 
         public NoticiasViewHolder(View itemView) {
             super(itemView);
@@ -73,6 +153,7 @@ public class AdapterNoticias extends RecyclerView.Adapter<AdapterNoticias.Notici
             fecha_noticia = itemView.findViewById(R.id.fecha_noticia);
             resumen_noticia = itemView.findViewById(R.id.resumen_noticia);
             imagen_noticia = itemView.findViewById(R.id.imagen_noticia);
+            cardview_id = itemView.findViewById(R.id.cardview_id);
         }
     }
 }

@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +33,8 @@ public class NoticiasFiltradoFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     ArrayList<Noticia> listaNoticias;
     RecyclerView recyclerView;
+    String nombre_categoria;
+    ImageView imgBack;
 
     public NoticiasFiltradoFragment() {
         // Required empty public constructor
@@ -39,9 +42,11 @@ public class NoticiasFiltradoFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        ;
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            nombre_categoria  = bundle.getString(Tags.NOMBRE_CATEGORIA, "null");
+        }
     }
 
     @Override
@@ -53,33 +58,45 @@ public class NoticiasFiltradoFragment extends Fragment {
         listaNoticias = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recyclerViewNoticiasFiltro);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        imgBack= view.findViewById(R.id.ImgBack);
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = getFragmentManager().getBackStackEntryCount();
+                if (count == 0) {
+                    NoticiasFiltradoFragment.super.getActivity().onBackPressed();
+                    getFragmentManager().popBackStack();
+                } else {
+                    getFragmentManager().popBackStack();
+                }
+            }
+        });
 
-        //cargarNoticias();
+        cargarNoticias();
 
-        AdapterNoticias adapterNoticias = new AdapterNoticias(listaNoticias);
+        AdapterNoticias adapterNoticias = new AdapterNoticias(listaNoticias,getContext());
         recyclerView.setAdapter(adapterNoticias);
         return view;
 
     }
 
-    //METODO PARA RELLENAR LOS ITEMS
 
+    //METODO PARA RELLENAR LOS ITEMS
    public void cargarNoticias() {
+
         String token = Preferencias.getToken(getActivity());
         String usuario_id = Preferencias.getID(getActivity());
-        //STRING AÑADIR CATEGORIA !!!!!!!!!!!!!!!!!;
-
         //Creamos el JSON que vamos a mandar al servidor
         JSONObject json = new JSONObject();
         try {
             json.put(Tags.TOKEN, token);
             json.put(Tags.USUARIO_ID, usuario_id);
-            //json.put(Tags.CATEGORIA_NOTICIA, categoria_noticia);
+            json.put(Tags.CATEGORIA_NOTICIA, nombre_categoria);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        Log.v("JSON","este es el json--->"+json);
         //Se hace petición de login al servidor.
         json = JSONUtil.hacerPeticionServidor("enews/get_noticias/", json);
 

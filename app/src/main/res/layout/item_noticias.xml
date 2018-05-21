@@ -74,10 +74,11 @@
             android:layout_width="98dp"
             android:layout_height="0dp"
             android:scaleType="fitCenter"
+            android:tag="logo"
             cardview:layout_constraintBottom_toBottomOf="parent"
             cardview:layout_constraintEnd_toEndOf="parent"
             cardview:layout_constraintStart_toEndOf="@+id/fecha_noticia"
             cardview:layout_constraintTop_toTopOf="parent"
-            cardview:srcCompat="@android:color/holo_green_dark" />
+            cardview:srcCompat="@drawable/logo_final" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

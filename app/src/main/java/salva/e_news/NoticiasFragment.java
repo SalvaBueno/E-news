@@ -43,7 +43,7 @@ public class NoticiasFragment extends Fragment {
         lol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).cargarfiltrado("lol");
+                ((MainActivity)getActivity()).cargarfiltrado("Lol");
             }
         });
 
@@ -51,7 +51,7 @@ public class NoticiasFragment extends Fragment {
         overwatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).cargarfiltrado("overwatch");
+                ((MainActivity)getActivity()).cargarfiltrado("Overwatch");
             }
         });
 
@@ -59,7 +59,7 @@ public class NoticiasFragment extends Fragment {
         clash_royale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).cargarfiltrado("clashroyale");
+                ((MainActivity)getActivity()).cargarfiltrado("ClashRoyale");
             }
         });
 
@@ -75,7 +75,7 @@ public class NoticiasFragment extends Fragment {
         csgo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).cargarfiltrado("csgo");
+                ((MainActivity)getActivity()).cargarfiltrado("CSGO");
             }
         });
 
@@ -83,7 +83,7 @@ public class NoticiasFragment extends Fragment {
         hs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).cargarfiltrado("hs");
+                ((MainActivity)getActivity()).cargarfiltrado("Hearthstone");
             }
         });
 
@@ -91,7 +91,7 @@ public class NoticiasFragment extends Fragment {
         fornite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).cargarfiltrado("fornite");
+                ((MainActivity)getActivity()).cargarfiltrado("Fornite");
             }
         });
 
@@ -99,7 +99,7 @@ public class NoticiasFragment extends Fragment {
         wow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).cargarfiltrado("wow");
+                ((MainActivity)getActivity()).cargarfiltrado("Wow");
             }
         });
 

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     final Fragment comentariosFragment = new ComentariosFragment();
     final Fragment noticiasFragment = new NoticiasFragment();
     final Fragment editarPerfil = new EditarPerfilFragment();
-    final Fragment noticiasFiltradasFragment = new NoticiasFiltradoFragment();
+
 
 
     @Override
@@ -77,9 +77,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void cargarfiltrado(String nombreCategoria){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainer, noticiasFiltradasFragment).commit();
+        final Fragment noticiasFiltradasFragment = new NoticiasFiltradoFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        Bundle arguments = new Bundle();
+        arguments.putString(Tags.NOMBRE_CATEGORIA, nombreCategoria);
+        noticiasFiltradasFragment.setArguments(arguments);
+        fragmentTransaction.replace(R.id.fragmentContainer, noticiasFiltradasFragment).addToBackStack(null).commit();
     }
 
 

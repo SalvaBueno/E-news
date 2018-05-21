@@ -4,10 +4,6 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
-/**
- * Created by dreams on 28/12/16.
- */
-
 //public class TextViewPlus extends TextView{
 public class TextViewPlus extends android.support.v7.widget.AppCompatTextView {
 
