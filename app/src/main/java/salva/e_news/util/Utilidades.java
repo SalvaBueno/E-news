@@ -12,7 +12,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
 /**
- * Created by brian on 1/03/17.
+ * Created by salva
  */
 
 public class Utilidades {

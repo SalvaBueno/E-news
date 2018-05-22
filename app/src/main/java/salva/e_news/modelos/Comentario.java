@@ -20,13 +20,13 @@ public class Comentario {
             e.printStackTrace();
         }
         try {
-            setContenido_comentario(jsonObject.getString(Tags.FECHA_COMENTARIO));
-        }catch (JSONException e){
+            setNoticia(new Noticia(jsonObject.getJSONObject(Tags.NOTICIA)));
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         try {
-            setNoticia(new Noticia(jsonObject.getJSONObject(Tags.NOTICIA)));
-        } catch (JSONException e) {
+            setFecha_comentario(jsonObject.getString(Tags.FECHA_COMENTARIO));
+        }catch (JSONException e){
             e.printStackTrace();
         }
         try {

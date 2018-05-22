@@ -50,7 +50,9 @@
         <activity
             android:name=".CambiarContrasena"
             android:screenOrientation="portrait" />
-        <activity android:name=".DetalleNoticiaActivity"></activity>
+        <activity
+            android:name=".DetalleNoticiaActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
