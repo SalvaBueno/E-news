@@ -150,7 +150,7 @@ public class AdapterNoticias extends RecyclerView.Adapter<AdapterNoticias.Notici
         public NoticiasViewHolder(View itemView) {
             super(itemView);
             nombre_noticia = itemView.findViewById(R.id.nombre_noticia);
-            fecha_noticia = itemView.findViewById(R.id.fecha_noticia);
+            fecha_noticia = itemView.findViewById(R.id.tv_fecha_noticia);
             resumen_noticia = itemView.findViewById(R.id.resumen_noticia);
             imagen_noticia = itemView.findViewById(R.id.imagen_noticia);
             cardview_id = itemView.findViewById(R.id.cardview_id);

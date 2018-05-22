@@ -50,4 +50,7 @@
     <string name="cambio_contrasena_correcto">Cambio de contraseña realizado correctamente.</string>
     <string name="datos_usuario">Datos del usuario</string>
     <string name="cambios_para_editar">Introduce cambios para poder editar</string>
+    <string name="veranadircomentarios"><u>Ver comentarios o añadir uno.</u></string>
+    <string name="anadircomentario">Añadir Comentario</string>
+    <string name="enviarcomentario">Enviar Comentario</string>
 </resources>

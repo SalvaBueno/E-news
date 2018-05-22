@@ -17,65 +17,50 @@
         android:layout_height="100dp">
 
         <TextView
-            android:id="@+id/nombre_noticia"
-            android:layout_width="190dp"
+            android:id="@+id/textViewNoticia"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            cardview:layout_constraintBottom_toTopOf="@+id/view2"
-            cardview:layout_constraintEnd_toStartOf="@+id/tv_fecha_noticia"
+            cardview:layout_constraintEnd_toStartOf="@+id/TextViewNomUsuario"
             cardview:layout_constraintStart_toStartOf="parent"
             cardview:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_fecha_noticia"
+            android:id="@+id/TextViewNomUsuario"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="4dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:textSize="12sp"
-            cardview:layout_constraintBottom_toTopOf="@+id/view2"
-            cardview:layout_constraintEnd_toStartOf="@+id/imagen_noticia"
-            cardview:layout_constraintStart_toEndOf="@+id/nombre_noticia"
-            cardview:layout_constraintTop_toTopOf="@+id/nombre_noticia" />
+            android:textAlignment="textEnd"
+            cardview:layout_constraintEnd_toEndOf="parent"
+            cardview:layout_constraintStart_toEndOf="@+id/textViewNoticia"
+            cardview:layout_constraintTop_toTopOf="@+id/textViewNoticia" />
 
         <TextView
-            android:id="@+id/resumen_noticia"
+            android:id="@+id/textViewComentario"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             cardview:layout_constraintBottom_toBottomOf="parent"
-            cardview:layout_constraintEnd_toStartOf="@+id/imagen_noticia"
+            cardview:layout_constraintEnd_toEndOf="parent"
             cardview:layout_constraintStart_toStartOf="parent"
-            cardview:layout_constraintTop_toBottomOf="@+id/view2" />
+            cardview:layout_constraintTop_toBottomOf="@+id/view" />
 
         <View
-            android:id="@+id/view2"
-            android:layout_width="0dp"
+            android:id="@+id/view"
+            android:layout_width="fill_parent"
             android:layout_height="1dp"
+            android:background="@color/gris"
             android:layout_marginBottom="4dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:background="@color/gris"
-            cardview:layout_constraintBottom_toTopOf="@+id/resumen_noticia"
-            cardview:layout_constraintEnd_toStartOf="@+id/imagen_noticia"
-            cardview:layout_constraintStart_toStartOf="parent"
-            cardview:layout_constraintTop_toBottomOf="@+id/nombre_noticia" />
-
-        <ImageView
-            android:id="@+id/imagen_noticia"
-            android:layout_width="98dp"
-            android:layout_height="0dp"
-            android:scaleType="fitCenter"
-            android:tag="logo"
-            cardview:layout_constraintBottom_toBottomOf="parent"
+            cardview:layout_constraintBottom_toTopOf="@+id/textViewComentario"
             cardview:layout_constraintEnd_toEndOf="parent"
-            cardview:layout_constraintStart_toEndOf="@+id/tv_fecha_noticia"
-            cardview:layout_constraintTop_toTopOf="parent"
-            cardview:srcCompat="@drawable/logo_final" />
+            cardview:layout_constraintStart_toStartOf="parent"
+            cardview:layout_constraintTop_toBottomOf="@+id/TextViewNomUsuario" />
+
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

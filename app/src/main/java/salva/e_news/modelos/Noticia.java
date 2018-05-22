@@ -20,6 +20,7 @@ public class Noticia implements Parcelable {
     String fecha_noticia;
     String nombre_noticia;
     String rutaImagen;
+    String titular_noticia;
 
     public Noticia(JSONObject jsonObject){
 
@@ -49,6 +50,11 @@ public class Noticia implements Parcelable {
             e.printStackTrace();
         }
         try {
+            setTitular_noticia(jsonObject.getString(Tags.TITULAR_NOTICIA));
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        try {
             setFecha_noticia(jsonObject.getString(Tags.FECHA_NOTICIA));
         }catch (JSONException e){
             e.printStackTrace();
@@ -66,6 +72,7 @@ public class Noticia implements Parcelable {
         descripcion_noticia = in.readString();
         resumen_noticia = in.readString();
         categoria_noticia = in.readString();
+        titular_noticia = in.readString();
         fecha_noticia = in.readString();
         nombre_noticia = in.readString();
         rutaImagen = in.readString();
@@ -132,6 +139,13 @@ public class Noticia implements Parcelable {
 
     public void setResumen_noticia(String resumen_noticia) { this.resumen_noticia = resumen_noticia;  }
 
+    public String getTitular_noticia() {
+        return titular_noticia;
+    }
+
+    public void setTitular_noticia(String titular_noticia) {
+        this.titular_noticia = titular_noticia;
+    }
 
     @Override
     public int describeContents() {
@@ -144,6 +158,7 @@ public class Noticia implements Parcelable {
         dest.writeString(descripcion_noticia);
         dest.writeString(resumen_noticia);
         dest.writeString(categoria_noticia);
+        dest.writeString(titular_noticia);
         dest.writeString(fecha_noticia);
         dest.writeString(nombre_noticia);
         dest.writeString(rutaImagen);

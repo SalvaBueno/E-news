@@ -78,7 +78,8 @@ public class Tags {
             LISTA_NOTICIAS="noticias",
             RESUMEN_NOTICIA="resumen_noticia",
             IMAGEN_NOTICIA="imagen_noticia",
-            NOTICIA_PK ="noticia_pk";
+            NOTICIA_PK ="noticia_pk",
+            TITULAR_NOTICIA ="titular_noticia";
 
 
     public static final String ERRORCONEXION = "error conexion";
