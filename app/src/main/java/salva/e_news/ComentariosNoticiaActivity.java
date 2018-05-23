@@ -1,5 +1,7 @@
 package salva.e_news;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -21,6 +23,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import salva.e_news.modelos.Comentario;
+import salva.e_news.modelos.Noticia;
 import salva.e_news.peticionesBD.JSONUtil;
 import salva.e_news.peticionesBD.Preferencias;
 import salva.e_news.peticionesBD.Tags;
@@ -33,13 +36,15 @@ public class ComentariosNoticiaActivity extends AppCompatActivity {
     Button enviarcomentario;
     String mensaje;
     RecyclerView recyclerView;
+    Noticia noticia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comentarios_noticia);
-        noticiapk = getIntent().getExtras().getString(Tags.NOTICIA_PK);
-
+        if(getIntent().getExtras().getString(Tags.NOTICIA_PK)!=null){
+            noticiapk = getIntent().getExtras().getString(Tags.NOTICIA_PK);
+        }
         cargarbotones();
         cargarComentarios();
         AdapterComentariosNoticia adaptadorComentarios = new AdapterComentariosNoticia(listaComentario);
@@ -111,9 +116,13 @@ public class ComentariosNoticiaActivity extends AppCompatActivity {
                         listaComentario.add(comentario);
                     }
                 }
-            }
-            // Resultado falla por otro error.
-            else if (p.contains(Tags.ERROR)) {
+            }else if(p.contains(Tags.NO_COMENTARIOS)) {
+                JSONObject jsonObject = new JSONObject();
+                //jsonObject.put()
+                //ME QUEDO AQUI TENGO QUE RELLENAR UN COMENTARIO VACIO, CON EL PK DE LA NOTICIA PARA QUE PUEDA CARGAR EL REGISTRO DEL COMENTARIO AUNQUE NO HAYA COMENTARIOS ANTES.
+                comentario = new Comentario(jsonObject);
+                // Resultado falla por otro error.
+            }else if (p.contains(Tags.ERROR)) {
                 String msg = json.getString(Tags.MENSAJE);
                 //mensaje = msg;
             }
@@ -123,6 +132,51 @@ public class ComentariosNoticiaActivity extends AppCompatActivity {
     }
 
     public boolean registrarcomentario(){
+        String token = Preferencias.getToken(ComentariosNoticiaActivity.this);
+        String usuario_id = Preferencias.getID(ComentariosNoticiaActivity.this);
+        String noticiapk = comentario.getNoticia().getPk();
+        String contenido_comentario = anadircomentario.getText().toString();
+
+        JSONObject json = new JSONObject();
+        try {
+            json.put(Tags.TOKEN,token);
+            json.put(Tags.USUARIO_ID,usuario_id);
+            json.put(Tags.NOTICIA_PK,noticiapk);
+            json.put(Tags.CONTENIDO_COMENTARIO,contenido_comentario);
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        json = JSONUtil.hacerPeticionServidor("enews/registrar_comentarios/",json);
+
+        try{
+            String p = json.getString(Tags.RESULTADO);
+            if (p.contains(Tags.ERRORCONEXION)) {
+                return false;
+            }
+            //En caso de que conecte
+            else if (p.contains(Tags.OK)) {
+                onRestart();
+                return true;
+            }else if (p.contains(Tags.ERROR)) {
+                String msg = json.getString(Tags.MENSAJE);
+                return false;
+            }
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
         return true;
+    }
+
+    @Override
+    protected void onRestart() {
+        // TODO Auto-generated method stub
+        super.onRestart();
+        Intent i = new Intent(ComentariosNoticiaActivity.this,ComentariosNoticiaActivity.class);
+        i.putExtra(Tags.NOTICIA_PK, comentario.getNoticia().getPk());
+        startActivity(i);
+        finish();
+
     }
 }
