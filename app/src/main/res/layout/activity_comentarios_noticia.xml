@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ComentariosNoticiaActivity">
+    tools:context=".ComentariosNoticiaActivity"
+    android:background="@color/colorfondoaplicacion">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,19 +19,20 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/comentarios"
+            android:textColor="@color/colorbotonesaplicacion"
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="368dp"
-            android:layout_height="386dp"
+            android:id="@+id/recyclercomentarionoticia"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,27 +43,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
             android:text="@string/anadircomentario"
+            android:textColor="@color/colorbotonesaplicacion"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:maxLength="150"
-            android:maxLines="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclercomentarionoticia" />
 
         <Button
             android:id="@+id/enviarcomentario"
@@ -69,14 +57,35 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/enviarcomentario"
+            android:layout_marginTop="16dp"
             android:background="@color/colorbotonesaplicacion"
+            android:text="@string/enviarcomentario"
             android:textColor="@color/blanco"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="150"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/anadircomentario"
+                android:layout_width="match_parent"
+                android:maxLength="150"
+                android:layout_height="wrap_content"
+                android:hint="@string/escribacomentario" />
+        </android.support.design.widget.TextInputLayout>
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

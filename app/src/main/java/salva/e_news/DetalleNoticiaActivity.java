@@ -32,6 +32,14 @@ public class DetalleNoticiaActivity extends AppCompatActivity {
         cargarBotones();
         recogerDatosNoticia();
         cargarNoticias();
+        textViewComentarios.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+                Intent i = new Intent(DetalleNoticiaActivity.this,ComentariosNoticiaActivity.class);
+                i.putExtra(Tags.NOTICIA_PK, noticia.getPk());
+                startActivity(i);
+           }
+       });
     }
 
     private boolean recogerDatosNoticia() {
@@ -51,13 +59,7 @@ public class DetalleNoticiaActivity extends AppCompatActivity {
        tv_fecha_noticia = findViewById(R.id.tv_fecha_noticia);
        img_noticia= findViewById(R.id.img_noticia);
        textViewComentarios = findViewById(R.id.textViewComentarios);
-       textViewComentarios.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-                Intent i = new Intent(DetalleNoticiaActivity.this,ComentariosNoticiaActivity.class);
-                startActivity(i);
-           }
-       });
+
 
     }
 

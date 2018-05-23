@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetalleNoticiaActivity">
+    tools:context=".DetalleNoticiaActivity"
+    android:background="@color/colorfondoaplicacion">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -70,7 +71,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:text="@string/veranadircomentarios"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorbotonesaplicacion"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,11 +82,10 @@
             android:id="@+id/tv_fecha_noticia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_nombre_noticia"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_noticia" />
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/img_noticia"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_titular_noticia" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

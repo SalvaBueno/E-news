@@ -51,6 +51,7 @@ public class ComentariosFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_comentarios, container, false);
 
         listaComentario = new ArrayList<>();
+
         recyclerView = view.findViewById(R.id.recyclerViewcomentarios);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
@@ -88,8 +89,6 @@ public class ComentariosFragment extends Fragment {
             }
             //En caso de que conecte
              else if (p.contains(Tags.OK)) {
-                String res = json.getString(Tags.RESULTADO);
-
                 JSONArray array = json.getJSONArray(Tags.LISTA_COMENTARIOS);
                 Log.v("ComentariooARRAY", array.toString());
                 if (array != null) {

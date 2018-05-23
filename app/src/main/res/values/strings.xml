@@ -32,8 +32,6 @@
     <string name="pass_min_cuatro">La nueva contraseña debe tener 4 caracteres como mínimo.</string>
     <string name="need_cambio_datos">Necesita cambiar algun campo para poder modificar sus datos.</string>
     <string name="cambio_datos_ok">Se han cambiado los datos correctamente.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="noticias">Noticias</string>
     <string name="comentarios">Comentarios</string>
@@ -53,4 +51,8 @@
     <string name="veranadircomentarios"><u>Ver comentarios o añadir uno.</u></string>
     <string name="anadircomentario">Añadir Comentario</string>
     <string name="enviarcomentario">Enviar Comentario</string>
+    <string name="escribacomentario">Escriba su comentario aquí</string>
+    <string name="comentariovacio">El comentario esta vacio escribe algo para enviarlo.</string>
+    <string name="comentarioregistrado">El comentario se ha registrado correctamente.</string>
+    <string name="comentarionoregistrado">El comentario no se ha podido registrar, intentelo de nuevo mas tarde.</string>
 </resources>

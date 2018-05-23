@@ -36,9 +36,9 @@ public class AdapterComentariosNoticia extends RecyclerView.Adapter<AdapterComen
 
     @Override
     public void onBindViewHolder(ComentariosViewHolder holder, int position) {
-        holder.nomUsuario.setText(listaComentarios.get(position).getFecha_comentario());
-        holder.nomNoticia.setText(listaComentarios.get(position).getNoticia().getNombre_noticia());
-        holder.textComentario.setText(listaComentarios.get(position).getContenido_comentario());
+        holder.tv_nombre_usuario_comentario.setText(listaComentarios.get(position).getUsuario().getUsername());
+        holder.tv_fecha_noticia_comentario.setText(listaComentarios.get(position).getFecha_comentario());
+        holder.tv_comentario_contenido.setText(listaComentarios.get(position).getContenido_comentario());
     }
 
     @Override
@@ -58,13 +58,13 @@ public class AdapterComentariosNoticia extends RecyclerView.Adapter<AdapterComen
     }
 
     public class ComentariosViewHolder extends RecyclerView.ViewHolder {
-        TextView nomUsuario, nomNoticia, textComentario;
+        TextView tv_nombre_usuario_comentario, tv_fecha_noticia_comentario, tv_comentario_contenido;
 
         public ComentariosViewHolder(View itemView) {
             super(itemView);
-            nomUsuario = itemView.findViewById(R.id.TextViewNomUsuario);
-            nomNoticia = itemView.findViewById(R.id.textViewNoticia);
-            textComentario = itemView.findViewById(R.id.textViewComentario);
+            tv_nombre_usuario_comentario = itemView.findViewById(R.id.tv_nombre_usuario_comentario);
+            tv_fecha_noticia_comentario = itemView.findViewById(R.id.tv_fecha_noticia_comentario);
+            tv_comentario_contenido = itemView.findViewById(R.id.tv_comentario_contenido);
         }
     }
 }

@@ -17,27 +17,28 @@
         android:layout_height="100dp">
 
         <TextView
-            android:id="@+id/textViewNoticia"
-            android:layout_width="270dp"
+            android:id="@+id/tv_nombre_usuario_comentario"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            cardview:layout_constraintEnd_toStartOf="@+id/TextViewNomUsuario"
+            cardview:layout_constraintEnd_toStartOf="@+id/tv_fecha_noticia_comentario"
             cardview:layout_constraintStart_toStartOf="parent"
             cardview:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/TextViewNomUsuario"
+            android:id="@+id/tv_fecha_noticia_comentario"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:textAlignment="textEnd"
             cardview:layout_constraintEnd_toEndOf="parent"
-            cardview:layout_constraintStart_toEndOf="@+id/textViewNoticia"
-            cardview:layout_constraintTop_toTopOf="@+id/textViewNoticia" />
+            cardview:layout_constraintStart_toEndOf="@+id/tv_nombre_usuario_comentario"
+            cardview:layout_constraintTop_toTopOf="@+id/tv_nombre_usuario_comentario" />
 
         <TextView
-            android:id="@+id/textViewComentario"
+            android:id="@+id/tv_comentario_contenido"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
@@ -52,15 +53,15 @@
             android:id="@+id/view"
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:background="@color/gris"
             android:layout_marginBottom="4dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            cardview:layout_constraintBottom_toTopOf="@+id/textViewComentario"
+            android:background="@color/gris"
+            cardview:layout_constraintBottom_toTopOf="@+id/tv_comentario_contenido"
             cardview:layout_constraintEnd_toEndOf="parent"
             cardview:layout_constraintStart_toStartOf="parent"
-            cardview:layout_constraintTop_toBottomOf="@+id/TextViewNomUsuario" />
+            cardview:layout_constraintTop_toBottomOf="@+id/tv_fecha_noticia_comentario" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

@@ -62,9 +62,9 @@ public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.
 
         public ComentariosViewHolder(View itemView) {
             super(itemView);
-            nomUsuario = itemView.findViewById(R.id.TextViewNomUsuario);
-            nomNoticia = itemView.findViewById(R.id.textViewNoticia);
-            textComentario = itemView.findViewById(R.id.textViewComentario);
+            nomUsuario = itemView.findViewById(R.id.tv_fecha_noticia_comentario);
+            nomNoticia = itemView.findViewById(R.id.tv_nombre_usuario_comentario);
+            textComentario = itemView.findViewById(R.id.tv_comentario_contenido);
         }
     }
 }
