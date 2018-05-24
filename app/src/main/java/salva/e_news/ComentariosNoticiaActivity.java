@@ -45,6 +45,7 @@ public class ComentariosNoticiaActivity extends AppCompatActivity {
         if(getIntent().getExtras().getString(Tags.NOTICIA_PK)!=null){
             noticiapk = getIntent().getExtras().getString(Tags.NOTICIA_PK);
         }
+
         cargarbotones();
         cargarComentarios();
         AdapterComentariosNoticia adaptadorComentarios = new AdapterComentariosNoticia(listaComentario);
@@ -116,11 +117,11 @@ public class ComentariosNoticiaActivity extends AppCompatActivity {
                         listaComentario.add(comentario);
                     }
                 }
+                //si no tiene comentarios creo una noticia para añadirle la pk
             }else if(p.contains(Tags.NO_COMENTARIOS)) {
                 JSONObject jsonObject = new JSONObject();
-                //jsonObject.put()
-                //ME QUEDO AQUI TENGO QUE RELLENAR UN COMENTARIO VACIO, CON EL PK DE LA NOTICIA PARA QUE PUEDA CARGAR EL REGISTRO DEL COMENTARIO AUNQUE NO HAYA COMENTARIOS ANTES.
-                comentario = new Comentario(jsonObject);
+                jsonObject.put(Tags.PK, noticiapk);
+                noticia = new Noticia(jsonObject);
                 // Resultado falla por otro error.
             }else if (p.contains(Tags.ERROR)) {
                 String msg = json.getString(Tags.MENSAJE);
@@ -132,16 +133,21 @@ public class ComentariosNoticiaActivity extends AppCompatActivity {
     }
 
     public boolean registrarcomentario(){
+        String noticiapk;
         String token = Preferencias.getToken(ComentariosNoticiaActivity.this);
         String usuario_id = Preferencias.getID(ComentariosNoticiaActivity.this);
-        String noticiapk = comentario.getNoticia().getPk();
+        if(comentario == null){
+            noticiapk = noticia.getPk();
+        }else {
+            noticiapk = comentario.getNoticia().getPk();
+        }
         String contenido_comentario = anadircomentario.getText().toString();
 
         JSONObject json = new JSONObject();
         try {
             json.put(Tags.TOKEN,token);
             json.put(Tags.USUARIO_ID,usuario_id);
-            json.put(Tags.NOTICIA_PK,noticiapk);
+            json.put(Tags.NOTICIA_PK, noticiapk);
             json.put(Tags.CONTENIDO_COMENTARIO,contenido_comentario);
 
         }catch (JSONException e){
@@ -174,7 +180,18 @@ public class ComentariosNoticiaActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
         super.onRestart();
         Intent i = new Intent(ComentariosNoticiaActivity.this,ComentariosNoticiaActivity.class);
-        i.putExtra(Tags.NOTICIA_PK, comentario.getNoticia().getPk());
+        try{
+            i.putExtra(Tags.NOTICIA_PK, comentario.getNoticia().getPk());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        
+        try{
+            i.putExtra(Tags.NOTICIA_PK,noticia.getPk());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         startActivity(i);
         finish();
 
