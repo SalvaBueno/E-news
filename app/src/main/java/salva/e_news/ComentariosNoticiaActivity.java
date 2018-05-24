@@ -185,7 +185,7 @@ public class ComentariosNoticiaActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-        
+
         try{
             i.putExtra(Tags.NOTICIA_PK,noticia.getPk());
         }catch (Exception e){

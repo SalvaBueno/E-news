@@ -20,13 +20,11 @@ public class Preferencias{
 
 	public static void guardarEnPref(Activity actividad,String usuario,String token){
 		Log.v("preferencias", "entor");
-		//SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 		SharedPreferences pref = actividad.getSharedPreferences("preferencias",actividad.MODE_PRIVATE);
 		Log.v("preferencias", ""+pref);
 		Editor edit=(pref.edit());
 		edit.putString("usuario", usuario);
 		edit.putString("token",token);
-		//edit.apply();
 		edit.commit();
 	}
 		

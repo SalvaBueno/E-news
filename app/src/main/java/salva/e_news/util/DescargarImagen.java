@@ -73,16 +73,6 @@ public class DescargarImagen {
 			}
 		}
 	}
-	public static Bitmap borrarImagen(String ruta, String picName) {
-		File f = new File(Environment.getExternalStorageDirectory()
-				+ "/Mimame/" + ruta + picName);
-		if (f.exists()) {
-			Bitmap imagen_guardada = BitmapFactory.decodeFile(f.getAbsolutePath());
-			return imagen_guardada;
-		} else {
-			return null;
-		}
-	}
 
 	public static void crearCarpeta(String ruta) {
 		String folder_main = "Mimame/";
