@@ -32,6 +32,8 @@ public class DetalleNoticiaActivity extends AppCompatActivity {
         cargarBotones();
         recogerDatosNoticia();
         cargarNoticias();
+
+        //Onclick para abrir los comentarios de la noticia especifica pasandole la pk de la noticia
         textViewComentarios.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -41,7 +43,8 @@ public class DetalleNoticiaActivity extends AppCompatActivity {
            }
        });
     }
-
+    //Recoger el objeto noticia que pasamos desde la anterior activity para poder utilizar la pk de
+    // la noticia para hacer la consulta al servidor par obtener los datos
     private boolean recogerDatosNoticia() {
         try {
             noticia = getIntent().getExtras().getParcelable("noticia");
@@ -62,7 +65,7 @@ public class DetalleNoticiaActivity extends AppCompatActivity {
 
 
     }
-
+    //Metodo que carga la noticia con la pk obtenida que recibimos en el metodo recogerDatosNoticia
     public void cargarNoticias() {
 
         String token = Preferencias.getToken(DetalleNoticiaActivity.this);
@@ -80,7 +83,7 @@ public class DetalleNoticiaActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.v("JSON","este es el json--->"+json);
-        //Se hace petición de login al servidor.
+        //Se hace petición al servidor para obtener los datos de la noticia
         json = JSONUtil.hacerPeticionServidor("enews/get_noticia/", json);
 
         try {
@@ -90,7 +93,9 @@ public class DetalleNoticiaActivity extends AppCompatActivity {
             if (p.contains(Tags.ERRORCONEXION)) {
                 // mensaje = "Error de conexión";
             }
-            //En caso de que conecte y no haya animales para dicha busqueda.
+            //En caso de que conecte y devuelva el tags.OK Se crea la noticia y se rellenan los
+            // campos en su respectivo layout, la imagen de la noticia obtiene a traves de la
+            // aplicacion la ruta y con el metodo de DescargaImagen descargamos gracias a esa ruta.
             else if (p.contains(Tags.OK)) {
                 Noticia noticia = new Noticia(json);
                 if(noticia != null) {

@@ -47,14 +47,15 @@ public class MainActivity extends AppCompatActivity {
         dialog.setMessage("Cargando datos...");
         dialog.setCancelable(false);
         dialog.show();
-
+        //Para hacer que el fragmento que aparezca por defecto el primero sea el fragmento de
+        // las noticias que esta en el centro.
         if (savedInstanceState == null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragmentContainer, noticiasFragment).commit();
             bnv.setSelectedItemId(R.id.noticias);
         }
 
-
+        //Definimos la navegacion con los botones y sus respectivos fragmentos.
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -76,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         dialog.cancel();
     }
 
+    //Cuando se quieran cargar las noticias de una categoria especifica se llamara a este metodo
+    // para pasarle a traves de Bundle el tags.NOMBRE_CATEGORIA para poder realizar la consulta al servidor.
     public void cargarfiltrado(String nombreCategoria){
         final Fragment noticiasFiltradasFragment = new NoticiasFiltradoFragment();
         FragmentManager fm = getSupportFragmentManager();
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragmentContainer, noticiasFiltradasFragment).addToBackStack(null).commit();
     }
 
-
+    //Lanzamos el login desde el MainActivity
     @Override
     protected void onResume() {
         super.onResume();
@@ -119,7 +122,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+    //Lanzamos la activity lanzar login comprobando antes si hay internet, ya que la aplicacion no
+    // tendria sentido utilizarse en el caso de que no hubiera ya que el uso principal es la opinion
+    // y lectura de opiniones de los usuarios conectados simultaneamente.
     public void lanzarLogin() {
         if (hayInternet()) {
             String token = Usuario.getToken(getApplicationContext());
@@ -129,11 +134,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, Tags.LOGIN);
             }
         } else {
-            //AQUI EL LOGIN CON SQLITE
+
         }
     }
 
-
+    //Para comprobar si hay internet en la aplicacion
     public boolean hayInternet() {
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);

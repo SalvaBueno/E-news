@@ -31,18 +31,21 @@ public class RecordarPass extends AppCompatActivity {
         textInputLayout_email = findViewById(R.id.text_email_recordar);
         cargarBotones();
     }
-
+    //Cargamos los botones, campos de la activity y enviamos la peticion.
     private void cargarBotones() {
         recordar_pass = findViewById(R.id.button_recordar);
         recordar_pass.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
+                //Antes de hacer la peticion al servidor hacemos las comprobaciones necesarias.
                 if (textInputLayout_email.getText().toString().isEmpty() || textInputLayout_email.getText().toString().equals("")) {
                     mensaje=getResources().getString(R.string.debe_indicar_nombre_usuario_registrado);
                     Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 } else {
-//                    Para cerrar el teclado antes de mostrar el AlertDialog
+                    // Para cerrar el teclado antes de mostrar el AlertDialog
                     InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputMethodManager.hideSoftInputFromWindow(textInputLayout_email.getWindowToken(), 0);
+                    //Dialogo que confirma el cambio de contraseña informado al usuario que se
+                    // le enviara un correo con la nueva contraseña auto generada.
                     AlertDialog alertDialog = new AlertDialog.Builder(RecordarPass.this).create();
                     alertDialog.setTitle(getResources().getString(R.string.recordarpasstitulo));
                     alertDialog.setMessage(getResources().getString(R.string.mensaje_recordar_pass));
@@ -51,6 +54,7 @@ public class RecordarPass extends AppCompatActivity {
                             JSONObject json = new JSONObject();
                             try {
                                 json.put(Tags.USUARIO, textInputLayout_email.getText().toString());
+                                //Se hace la peticion al servidor con el json que lleva dentro el email del usuario.
                                 json = JSONUtil.hacerPeticionServidor("usuarios/java/recuperar_contrasena/", json);
 
 
@@ -64,6 +68,9 @@ public class RecordarPass extends AppCompatActivity {
 //                                return false;
                                 }
                                 else if (p.contains(Tags.OK)) {
+                                    //Si el servidor devuelve OK y se ha generado una nueva
+                                    // contraseña porque el usuario es correcto, tendra que mirar
+                                    // el su correo para poder acceder a la apliacion con la nueva contraseña.
                                     mensaje= getResources().getString(R.string.mensaje_enviado);
                                     Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
                                     finish();

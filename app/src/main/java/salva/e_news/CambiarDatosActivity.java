@@ -43,7 +43,7 @@ public class CambiarDatosActivity extends AppCompatActivity {
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(nombre_usu.getWindowToken(), 0);
                 inputMethodManager.hideSoftInputFromWindow(email_usu.getWindowToken(), 0);
-                if(user.getUsername().equals(nombre_usu.getText().toString()) && user.getCorreo().equals(email_usu.getText().toString())){
+                if(user.getUsername().equals(nombre_usu.getText().toString()) || user.getCorreo().equals(email_usu.getText().toString())){
                     mensaje=getResources().getString(R.string.need_cambio_datos);
                 } else{
                     editarUsuario();
@@ -55,7 +55,8 @@ public class CambiarDatosActivity extends AppCompatActivity {
             }
         });
     }
-
+    //Metodo que hacemos al iniciar la actividad para cargar los datos del usuario que esten en
+    // el servidor.
     public void cargarUsuario() {
         //Creamos el JSON que vamos a mandar al servidor
         JSONObject jsonConsulta = new JSONObject();
@@ -67,7 +68,7 @@ public class CambiarDatosActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //Hacemos petición de lista de centros al servidor
+        //Hacemos petición de para obtener el perfil del usuario y cargar sus datos.
         jsonConsulta = JSONUtil.hacerPeticionServidor("usuarios/java/get_perfil/",jsonConsulta);
 
         try{
@@ -94,7 +95,11 @@ public class CambiarDatosActivity extends AppCompatActivity {
     }
 
 
-
+    //Metodo que se utilizara para hacer la peticion al servidor que cambiara los datos del usuario,
+    // en el caso de que los datos se hayan cambiado correctamente se cerrara la activity para
+    // pedirle al usuario que vuelva a iniciar sesion con los nuevos datos. En el caso de fallo ya
+    // sea de conexion o fallo interno en la base de datos. Cualquier de los errores en el caso
+    // de producirse se mostraran con un snackbar.
     public void editarUsuario() {
         nombre = nombre_usu.getText().toString();
         correo = email_usu.getText().toString();
@@ -120,7 +125,7 @@ public class CambiarDatosActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            //Hacemos petición de lista de centros al servidor
+            //Hacemos petición para cambiar los datos del usuario
             jsonConsulta = JSONUtil.hacerPeticionServidor("usuarios/java/cambiar_datos/",jsonConsulta);
 
             try{

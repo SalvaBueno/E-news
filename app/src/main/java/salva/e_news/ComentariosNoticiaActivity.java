@@ -78,6 +78,7 @@ public class ComentariosNoticiaActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 1));
     }
 
+    //METODO para obtener los datos que rellenaran los item del AdapterComentariosNoticia
     public void cargarComentarios() {
         String token = Preferencias.getToken(ComentariosNoticiaActivity.this);
         String usuario_id = Preferencias.getID(ComentariosNoticiaActivity.this);
@@ -104,7 +105,10 @@ public class ComentariosNoticiaActivity extends AppCompatActivity {
             if (p.contains(Tags.ERRORCONEXION)) {
                 // mensaje = "Error de conexión";
             }
-            //En caso de que conecte
+            //En caso de que conecte y devuelva Tags.OK. Creamos un JsonArray con el tags que
+            // pasamos del servidor que en este caso seria Tags.LISTA_COMENTARIOS (comentarios),
+            // con el bucle for recorremos el array para crear por cada campo del array un valor de
+            // tipo comentario que se añadira a un Arraylist de tipo comentario.
             else if (p.contains(Tags.OK)) {
                 JSONArray array = json.getJSONArray(Tags.LISTA_COMENTARIOS);
                 Log.v("ComentariooARRAY", array.toString());
@@ -122,6 +126,7 @@ public class ComentariosNoticiaActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put(Tags.PK, noticiapk);
                 noticia = new Noticia(jsonObject);
+
                 // Resultado falla por otro error.
             }else if (p.contains(Tags.ERROR)) {
                 String msg = json.getString(Tags.MENSAJE);
@@ -131,7 +136,11 @@ public class ComentariosNoticiaActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+    //Metodo para hacer la peticion al servidor que registre el comentario del usuario.
+    // Con las preferencias obtenemos el token y el id de usuario, y el pk de la noticia
+    // lo obtenemos de los datos que obtenemos de los comentarios que ya tenga la noticia en el
+    // caso de que no existan comentarios lo obtendremos de la noticia que creamos en
+    // cargarcomentarios si no se devuelve ninguna pk del servidor
     public boolean registrarcomentario(){
         String noticiapk;
         String token = Preferencias.getToken(ComentariosNoticiaActivity.this);
@@ -174,7 +183,8 @@ public class ComentariosNoticiaActivity extends AppCompatActivity {
 
         return true;
     }
-
+    //Cuando el comentario se envie correctamente recargamos la actividad para que aparezca
+    // automaticamente.
     @Override
     protected void onRestart() {
         // TODO Auto-generated method stub

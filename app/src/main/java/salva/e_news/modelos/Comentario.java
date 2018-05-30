@@ -7,18 +7,25 @@ import salva.e_news.modelos.Categoria;
 import salva.e_news.modelos.Noticia;
 import salva.e_news.peticionesBD.Tags;
 
+//Modelo comentario con sus set y get, para crear un nuevo objeto comentario utilizamos json.
 public class Comentario {
     String contenido_comentario;
     String fecha_comentario;
     Noticia noticia;
     Usuario usuario;
 
+    /**
+     * En el constructor del Usuario se le da un valor a las distintas variables.
+     * Estas se sacan del JSON que nos ha retornado el servidor.
+     * @param jsonObject
+     */
     public Comentario(JSONObject jsonObject) {
         try {
             setContenido_comentario(jsonObject.getString(Tags.CONTENIDO_COMENTARIO));
         }catch (JSONException e){
             e.printStackTrace();
         }
+        //Dentro de comentario tendra un objeto noticia.
         try {
             setNoticia(new Noticia(jsonObject.getJSONObject(Tags.NOTICIA)));
         } catch (JSONException e) {
@@ -29,6 +36,7 @@ public class Comentario {
         }catch (JSONException e){
             e.printStackTrace();
         }
+        //Dentro de comentario tendra un objeto usuario.
         try {
             setUsuario(new Usuario(jsonObject.getJSONObject(Tags.USUARIO)));
         } catch (JSONException e) {

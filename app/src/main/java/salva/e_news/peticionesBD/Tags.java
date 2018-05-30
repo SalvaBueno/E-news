@@ -1,7 +1,10 @@
 package salva.e_news.peticionesBD;
 
 public class Tags {
-
+    /**
+     * Los tags son valores finales que se van a utilizar en la aplicacion, ya sea para recibir datos
+     * del servidor o para hacer comprobaciones de envio de datos internos
+     */
     public static final String SERVIDOR = "http://192.168.1.27:8000/";
 
     public static final String USUARIO = "usuario",

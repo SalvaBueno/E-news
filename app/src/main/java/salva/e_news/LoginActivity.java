@@ -64,6 +64,8 @@ private static final int RC_SIGN_IN = 9001;
         setContentView(R.layout.activity_login);
         email_usu = findViewById(R.id.email_usu);
         pass_usu = findViewById(R.id.pass_usu);
+
+        //Firebase para el inicio de sesion con Google.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -173,7 +175,7 @@ private static final int RC_SIGN_IN = 9001;
                // Toast.makeText(getApplicationContext(), json.toString(), Toast.LENGTH_SHORT).show();
                 return false;
             }
-            //En caso de que conecte
+            //En caso de que conecte, guardamos el usuario en preferencias, con su token.
             else if (p.contains(Tags.OK)) {
                 Usuario.guardarEnPref(this, usuario, json.getString(Tags.TOKEN)); //Guarda en las preferencias la token
                 mensaje=getResources().getString(R.string.logeo_correcto);
@@ -212,7 +214,9 @@ private static final int RC_SIGN_IN = 9001;
         }
     }
 
-    //METODO DONDE SE EJECUTA EL INICIO CUANDO ES GOOGLE
+    //Metodo que ejecuta el login cuando es el boton de google. Esto lo que hara en el servidor es
+    // registrar un usuario con el email, y el nombre de usuario la primera parte del correo
+    // pudiendo el usuario cambiar el nombre desde dentro de la aplicacion.
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             GoogleSignInAccount acct = result.getSignInAccount();
@@ -235,7 +239,7 @@ private static final int RC_SIGN_IN = 9001;
                 if (p.contains(Tags.ERRORCONEXION)) {
                     Toast.makeText(getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
                 }
-                //En caso de que conecte
+                //En caso de que conecte guardamos el token en las preferencias
                 else if (p.contains(Tags.OK)) {
                     Usuario.guardarEnPref(this, nombre_usu2, json.getString(Tags.TOKEN));
                     setResult(Tags.LOGIN);

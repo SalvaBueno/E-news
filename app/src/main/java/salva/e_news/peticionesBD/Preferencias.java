@@ -8,7 +8,12 @@ import android.util.Log;
 
 
 public class Preferencias{
-	
+	/**
+	 * Clase para acceder a las preferencias, utilizamos el getId para obtener el id de usuario
+	 * GetToken para obtener el token de la sesion del usuario
+	 * guardarenpref Para guardar la actividad y datos del usuario
+	 * @param actividad
+	 */
 	public static String getID(Activity actividad){
 		String token = getToken(actividad);
 		if(token != null && !token.equals(""))

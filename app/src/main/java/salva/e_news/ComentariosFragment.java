@@ -63,7 +63,7 @@ public class ComentariosFragment extends Fragment {
         return view;
     }
 
-    //METODO PARA RELLENAR LOS ITEMS
+    //METODO para obtener los datos que rellenaran los item del AdapterComentarios.
    public void cargarComentarios() {
         String token = Preferencias.getToken(getActivity());
         String usuario_id = Preferencias.getID(getActivity());
@@ -77,7 +77,7 @@ public class ComentariosFragment extends Fragment {
             e.printStackTrace();
         }
 
-        //Se hace petición de login al servidor.
+        //Se hace petición para obtener los comentarios al servidor
         json = JSONUtil.hacerPeticionServidor("enews/get_comentarios/", json);
 
         try {
@@ -87,7 +87,10 @@ public class ComentariosFragment extends Fragment {
             if (p.contains(Tags.ERRORCONEXION)) {
             // mensaje = "Error de conexión";
             }
-            //En caso de que conecte
+            //En caso de que conecte y devuelva Tags.OK. Creamos un JsonArray con el tags que
+            // pasamos del servidor que en este caso seria Tags.LISTA_COMENTARIOS (comentarios),
+            // con el bucle for recorremos el array para crear por cada campo del array un valor de
+            // tipo comentario que se añadira a un Arraylist de tipo comentario.
              else if (p.contains(Tags.OK)) {
                 JSONArray array = json.getJSONArray(Tags.LISTA_COMENTARIOS);
                 Log.v("ComentariooARRAY", array.toString());

@@ -81,7 +81,11 @@ public class EditarPerfilFragment extends Fragment {
         });
         return view;
     }
-
+    //Metodo que utlizamos para cerrar la sesion, este metodo llamara al metodo deleteAppData()
+    // para borrar todos los datos internos de la aplicacion. Esto es necesario hacerlo por culpa
+    // del logeo de usuarios de google, ya que si no se borran los datos la proxima vez que se
+    // intente entrar con un usuario de google no te dejara seleccionar cuenta y solo te dejara
+    // entrar con la misma anteriormente utilizada
     private void cerrarsesion() {
         JSONObject jsonEnviado = new JSONObject();
         try {
@@ -92,6 +96,7 @@ public class EditarPerfilFragment extends Fragment {
             jsonRecibido = JSONUtil.hacerPeticionServidor(
                     "usuarios/java/logout/", jsonEnviado);
 
+            //Borramos el token del usuario al cerrar la sesion
             Usuario.borrarToken(getContext());
             ((MainActivity)getActivity()).lanzarLogin();
 
@@ -116,7 +121,8 @@ public class EditarPerfilFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
+    //Metodo que hacemos al iniciar la actividad para cargar los datos del usuario que esten en
+    // el servidor
     public void cargarUsuario() {
 
         JSONObject jsonConsulta = new JSONObject();
@@ -128,7 +134,7 @@ public class EditarPerfilFragment extends Fragment {
             e.printStackTrace();
         }
 
-        //Hacemos petición de lista de centros al servidor
+        //Hacemos petición de los datos del usuario
         jsonConsulta = JSONUtil.hacerPeticionServidor("usuarios/java/get_perfil/",jsonConsulta);
 
         try{

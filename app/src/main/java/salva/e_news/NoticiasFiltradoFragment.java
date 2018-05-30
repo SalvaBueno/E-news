@@ -58,6 +58,9 @@ public class NoticiasFiltradoFragment extends Fragment {
         listaNoticias = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recyclerViewNoticiasFiltro);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+
+        //Boton para volver atras de fragmento a fragmento con un boton en la esquina, ya que el
+        // boton back de android esta preparado para que minimize la aplicacion sin cerrar sesion para que el usuario pueda mantener la sesion iniciada.
         imgBack= view.findViewById(R.id.ImgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +84,8 @@ public class NoticiasFiltradoFragment extends Fragment {
     }
 
 
-    //METODO PARA RELLENAR LOS ITEMS
+    //Metodo que carga la noticia con la pk obtenida que recibimos en el onCreate con Bundle,
+    // utilizamos el nombre de la categoria para filtrar las noticias.
    public void cargarNoticias() {
 
         String token = Preferencias.getToken(getActivity());
@@ -107,7 +111,8 @@ public class NoticiasFiltradoFragment extends Fragment {
             if (p.contains(Tags.ERRORCONEXION)) {
             // mensaje = "Error de conexión";
             }
-            //En caso de que conecte y no haya animales para dicha busqueda.
+            //En caso de que conecte y devuelva el tags.OK Se crea la listaNoticias, que se enviara
+            // para el AdapterNoticias para que rellene los campos necesarios.
              else if (p.contains(Tags.OK)) {
                 String res = json.getString(Tags.RESULTADO);
                 JSONArray array = json.getJSONArray(Tags.LISTA_NOTICIAS);

@@ -63,14 +63,15 @@ public class Usuario{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        //Url de la imagen del usuario en el caso de que se quisiera integrar en la app.
         try {
             this.imagenURL = json.getString(Tags.FOTO);
             Log.i("USUARIO", this.imagenURL);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        //Booleano que comprueba si el login se hace desde google para que la aplicacion reconozca
+        // que opciones tiene habilitadas y cuales no
         try {
             setLogingoogle(json.getBoolean(Tags.LOGINGOOGLE));
         } catch (JSONException e) {

@@ -53,7 +53,9 @@
         <activity
             android:name=".DetalleNoticiaActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ComentariosNoticiaActivity"></activity>
+        <activity
+            android:name=".ComentariosNoticiaActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

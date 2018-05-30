@@ -35,11 +35,17 @@ public class AdapterNoticias extends RecyclerView.Adapter<AdapterNoticias.Notici
     ArrayList<Tarea> arrayTareas = new ArrayList<>();
     ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(1);
 
-
+    /**
+     * Lista de noticias que se añade en el recycler de noticias filtradas por la categoria que se
+     * selecciones en la pantalla principal
+     * @param listaNoticias
+     */
     public AdapterNoticias(ArrayList<Noticia> listaNoticias, Context context) {
         this.listaNoticias = listaNoticias;
         this.context = context;
-       puente = new Handler() {
+        //El puente es el nuevo Thread que añadira las imagenes en el siguiente ciclo de la
+        // aplicacion cuando se hayan descargado
+        puente = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 100) {
@@ -71,6 +77,9 @@ public class AdapterNoticias extends RecyclerView.Adapter<AdapterNoticias.Notici
         holder.fecha_noticia.setText(listaNoticias.get(position).getFecha_noticia());
         holder.resumen_noticia.setText(listaNoticias.get(position).getResumen_noticia());
         holder.imagen_noticia.setImageResource(R.drawable.logo_final);
+        //se añaden los valores en el recycler, se comprueba el tag de la imagen si el valor es logo,
+        // se añade una tarea nueva para ejecutar con el nuevo Thread para descargar la imagen,
+        // de esta manera quitamos los tiempos de carga de las activity que tengan imagenes.
         if (holder.imagen_noticia.getTag().equals("logo")) {
             holder.imagen_noticia.setScaleType(ImageView.ScaleType.FIT_CENTER);
             holder.imagen_noticia.setImageResource(R.drawable.logo_final);
@@ -78,7 +87,8 @@ public class AdapterNoticias extends RecyclerView.Adapter<AdapterNoticias.Notici
             Log.v("estaesssss", listaNoticias.get(position).getPk() + "");
             hacerTarea(position);
         }
-
+        //Aqui enviamos los datos con el onclick en la noticia utilizando el parcelable que hemos
+        // implementado en el modelo de Noticia.
         holder.cardview_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +104,8 @@ public class AdapterNoticias extends RecyclerView.Adapter<AdapterNoticias.Notici
     public int getItemCount() {
         return listaNoticias.size();
     }
-
+    //Metodo que llama al nuevo Thread llamado puente con el array de Tareas que se han añadido antes,
+    // de nuevo recordar que asi ahorramos el tiempo de carga en las consultas y descarga de imagenes.
     private void hacerTarea(final int position) {
         pool.execute(new Thread() {
             @Override
@@ -116,6 +127,7 @@ public class AdapterNoticias extends RecyclerView.Adapter<AdapterNoticias.Notici
             }
         });
     }
+    //Metodo que utilizamos para llamar al metodo DescargarImagen que descargara la imagen del servidor.
     private Bitmap descargarFoto(Object objeto, int pk) {
         Bitmap bitmap;
         int longitud = ((Noticia) objeto).getRutaImagen().length();

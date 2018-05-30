@@ -18,6 +18,11 @@ public class AdapterComentariosNoticia extends RecyclerView.Adapter<AdapterComen
     Context context;
     private View.OnClickListener listener;
 
+    /**
+     * Lista de comentarios que se añadira con el adaptador para el recycler de comentarios para
+     * las noticias especificas
+     * @param listaComentarios
+     */
     public AdapterComentariosNoticia(ArrayList<Comentario> listaComentarios) {
         this.listaComentarios = listaComentarios;
     }

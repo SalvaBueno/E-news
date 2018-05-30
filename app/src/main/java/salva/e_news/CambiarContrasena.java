@@ -40,10 +40,12 @@ public class CambiarContrasena extends AppCompatActivity {
         cambiarpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //De est manera ocultamos el teclado
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(pass_actual.getWindowToken(), 0);
                 inputMethodManager.hideSoftInputFromWindow(pass_nueva.getWindowToken(), 0);
                 inputMethodManager.hideSoftInputFromWindow(pass_confirmar.getWindowToken(), 0);
+                //Comprobamos los datos antes de solicitar el cambio de contraseña.
                 if(!pass_nueva.getText().toString().equals(pass_confirmar.getText().toString())){
                     mensaje=getResources().getString(R.string.pass_dont_match);
                     Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
@@ -68,7 +70,10 @@ public class CambiarContrasena extends AppCompatActivity {
         });
 
     }
-
+    //Metodo que se utilizara para hacer la peticion al servidor que cambia la contraseña, devolvera
+    // un booleano para comprobar si se hace correctamente o hay algun tipo de fallo,
+    // ya sea de conexion o fallo interno en la base de datos. Cualquier de los errores en el caso
+    // de producirse se mostraran con un snackbar.
     public boolean cambiarPass() {
 
         passAntigua = pass_actual.getText().toString();
@@ -86,7 +91,7 @@ public class CambiarContrasena extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //Hacemos petición de lista de centros al servidor
+        //Hacemos petición de solicitud de cambio de contraseña
         jsonConsulta = JSONUtil.hacerPeticionServidor("usuarios/java/cambiar_pass/",jsonConsulta);
 
         try{
@@ -97,7 +102,7 @@ public class CambiarContrasena extends AppCompatActivity {
                 mensaje= getResources().getString(R.string.error_conexion);
                 return false;
             }
-            //En caso de que conecte
+            //En caso de que conecte y no devuelva ningun error.
             else if (p.contains(Tags.OK)){
                 setResult(Tags.LOGIN_OK);
                 finish();

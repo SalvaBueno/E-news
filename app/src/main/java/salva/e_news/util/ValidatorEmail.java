@@ -9,10 +9,10 @@ public class ValidatorEmail {
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     /**
-     * Validate given email with regular expression.
+     * Validar email con el formato estandar.
      *
-     * @param email email for validation
-     * @return true valid email, otherwise false
+     * @param email para la validacion de email
+     * @return verdadero si es veraz, y falso en otro caso
      */
     public static boolean validateEmail(String email) {
 

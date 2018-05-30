@@ -30,10 +30,13 @@ public class RegistrarActivity extends AppCompatActivity {
         nombre_usu = (TextInputEditText)findViewById(R.id.nombre_usu);
         confirmar_pass_usu =(TextInputEditText)findViewById(R.id.confirmar_pass);
 
+        //Boton que envia la peticion al servidor para registrar un usuario
         registro_usu =(Button) findViewById(R.id.btn_registro);
         registro_usu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Antes de empezar la peticion se hacen las comprobaciones necesarias para
+                // comprobar que los campos rellenados por el usuario son validos.
                 if (!pass_usu.getText().toString().equals(confirmar_pass_usu.getText().toString())) {
                     mensaje= getResources().getString(R.string.pass_dont_match);
                     Snackbar.make(v, mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show();
@@ -63,10 +66,14 @@ public class RegistrarActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        //Hacemos petición de login al servidor
-                        json = JSONUtil.hacerPeticionServidor("usuarios/java/registrar_usuario/",json); //En contacto activity, es sesiones/java/getcentros
+                        //Hacemos petición de registro al servidor
+                        json = JSONUtil.hacerPeticionServidor("usuarios/java/registrar_usuario/",json);
 
                         try{
+                            //Dependiendo del Tags que devvuelva el servidor podemos comprobar si
+                            // ha existido algun tipo de error de conexion o otro tipo de error
+                            // interno en la aplicacion. Si el tag es OK se cerrara la activity
+                            // simplemente para que el usuario pueda iniciar sesion con sus nuevos datos.
                             String p = json.getString(Tags.RESULTADO);
                             if (p.contains(Tags.ERRORCONEXION)){
                                 mensaje= getResources().getString(R.string.error_conexion);

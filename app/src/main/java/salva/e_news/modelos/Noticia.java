@@ -11,6 +11,8 @@ import salva.e_news.modelos.Categoria;
 import salva.e_news.modelos.Noticia;
 import salva.e_news.peticionesBD.Tags;
 
+//Modelo de tipo noticia implementando parcelable para poder enviar datos desde el fragmento hasta
+// la activity del detalle noticia para hacer la consulta de los datos al servidor
 public class Noticia implements Parcelable {
 
     String pk;
@@ -22,6 +24,11 @@ public class Noticia implements Parcelable {
     String rutaImagen;
     String titular_noticia;
 
+    /**
+     * En el constructor del Usuario se le da un valor a las distintas variables.
+     * Estas se sacan del JSON que nos ha retornado el servidor.
+     * @param jsonObject
+     */
     public Noticia(JSONObject jsonObject){
 
         try {
@@ -62,7 +69,6 @@ public class Noticia implements Parcelable {
         try {
             setRutaImagen(jsonObject.getString(Tags.IMAGEN_NOTICIA));
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

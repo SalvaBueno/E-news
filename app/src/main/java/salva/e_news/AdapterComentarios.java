@@ -12,12 +12,18 @@ import java.util.ArrayList;
 
 import salva.e_news.modelos.Comentario;
 
+
 public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.ComentariosViewHolder> implements View.OnClickListener {
 
     ArrayList<Comentario> listaComentarios;
     Context context;
     private View.OnClickListener listener;
 
+    /**
+     * Lista de comentarios que se añadira con el adaptador para el recycler de comentarios
+     * generales del usuario que se muestra en el menu principal
+     * @param listaComentarios
+     */
     public AdapterComentarios(ArrayList<Comentario> listaComentarios) {
         this.listaComentarios = listaComentarios;
     }

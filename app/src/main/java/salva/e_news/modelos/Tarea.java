@@ -1,4 +1,6 @@
 package salva.e_news.modelos;
+//Objeto tarea que se va a utilizar en la app para crear un Thread nuevo para la descarga de
+// imagenes sin tiempos de carga en la aplicacion
 
 public class Tarea {
     private String funcion;

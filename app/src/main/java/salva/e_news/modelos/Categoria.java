@@ -5,11 +5,17 @@ import org.json.JSONObject;
 
 import salva.e_news.peticionesBD.Tags;
 
+//Modelo categoria con sus set and get. Para crear el objeto Noticia utilizamos un json con tags
 public class Categoria {
     private String pk;
     private String nombre_categoria;
     private String descripcion_categoria;
 
+    /**
+     * En el constructor del Usuario se le da un valor a las distintas variables.
+     * Estas se sacan del JSON que nos ha retornado el servidor.
+     * @param json
+     */
     public Categoria(JSONObject json) {
         try {
             setPk(json.getString(Tags.PK));

@@ -32,7 +32,8 @@ public class NoticiasFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-
+    //Fragmento que muestra los botones de las categorias de la aplicacion asignandoles un onClick
+    // con el metodo cargarfiltrado enviando el nombre de la categoria para que se puedan filtrar mas tarde.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
