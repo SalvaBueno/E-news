@@ -9,7 +9,7 @@
     <string name="alias_usuario">Alias</string>
     <string name="confirmar_contrasena">Confirmar Contraseña</string>
     <string name="recordar_pass"><u>Recordar Contraseña</u></string>
-    <string name="mensaje_recordar_pass">Se va a enviará un mensaje con la nueva clave a el correo electrónico que se utilice.</string>
+    <string name="mensaje_recordar_pass">Se va a enviar un mensaje con la nueva clave a el correo electrónico que se utilice.</string>
     <string name="recordarpasstitulo">¿Está seguro?</string>
     <string name="error_conexion">Error de conexión</string>
     <string name="logeo_correcto">Inicio de sesión correcto.</string>
